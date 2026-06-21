@@ -1,0 +1,236 @@
+/* ============================================================
+   ev-header.css — шапка + оверлей каталога
+   Интеграция: header.php (десктоп .header_main / моб .header_mobile),
+   оверлей — шаблон компонента catalog_menu_button.
+   ВНИМАНИЕ: классы редизайна (.ev-header) самостоятельны и НЕ
+   переопределяют штатные .header_*, чтобы не ломать JS Bitrix.
+   ============================================================ */
+
+/* topbar */
+.ev-topbar{background:var(--ev-dark);color:#cbcbcb;font-size:15px;}
+.ev-topbar .ev-wrap{display:flex;justify-content:space-between;gap:24px;height:40px;align-items:center;}
+.ev-topbar a{color:#cbcbcb;transition:color .15s;white-space:nowrap;}
+.ev-topbar a:hover{color:#fff;}
+
+/* header */
+.ev-header{background:var(--ev-bg2);box-shadow:var(--ev-shadow);position:sticky;top:0;z-index:60;}
+.ev-header .ev-wrap{display:flex;align-items:center;gap:26px;height:110px;}
+.ev-logo{display:flex;flex-direction:column;gap:9px;flex:none;width:240px;}
+.ev-logo .ev-logo-mark{height:26px;}
+.ev-logo .ev-logo-mark img{height:100%;width:auto;}
+.ev-logo .ev-logo-tag{height:11px;}
+.ev-logo .ev-logo-tag img{height:100%;width:auto;}
+
+.ev-catbtn{background:var(--ev-green);color:#f2f4f1;border-radius:var(--ev-radius);
+  height:60px;padding:0 24px;display:flex;align-items:center;gap:14px;
+  font-size:20px;font-weight:500;flex:none;transition:background .15s;}
+.ev-catbtn-t{text-transform:uppercase;letter-spacing:.3px;}
+.ev-catbtn:hover{background:var(--ev-green-d);}
+.ev-burger{width:30px;height:16px;position:relative;flex:none;}
+.ev-burger span{position:absolute;left:0;width:30px;height:2px;background:#f2f4f1;border-radius:2px;transition:.25s;}
+.ev-burger span:nth-child(1){top:0;}
+.ev-burger span:nth-child(2){top:7px;}
+.ev-burger span:nth-child(3){top:14px;}
+.ev-catbtn.is-open .ev-burger span:nth-child(1){top:7px;transform:rotate(45deg);}
+.ev-catbtn.is-open .ev-burger span:nth-child(2){opacity:0;}
+.ev-catbtn.is-open .ev-burger span:nth-child(3){top:7px;transform:rotate(-45deg);}
+
+.ev-search{flex:1 1 auto;min-width:300px;background:#fff;border-radius:var(--ev-radius);height:60px;
+  display:flex;align-items:center;gap:14px;padding:0 24px;max-width:600px;}
+.ev-search .ev-ic--search{width:19px;height:20px;color:var(--ev-gray3);}
+.ev-search input{flex:1;border:none;outline:none;font-size:20px;color:#333;background:none;min-width:0;}
+.ev-search input::placeholder{color:var(--ev-gray);}
+.ev-search .ev-find{display:flex;align-items:center;gap:8px;color:var(--ev-green);font-weight:500;font-size:20px;white-space:nowrap;}
+.ev-search .ev-find .ev-ic{width:17px;height:12px;}
+/* стрелка-возврат «← Найти» — та же ic-arrow, развёрнута влево */
+.ev-ic--enter{-webkit-mask-image:url(../images/ic-arrow-left.svg);mask-image:url(../images/ic-arrow-left.svg);}
+
+.ev-htools{display:flex;align-items:center;gap:36px;margin-left:36px;flex:none;}
+.ev-mtools{display:none;}
+.ev-contacts{display:flex;align-items:flex-start;gap:36px;}
+.ev-contact-mail{display:flex;align-items:center;gap:14px;font-size:18px;font-weight:600;}
+.ev-contact-mail .ev-ic{width:20px;height:16px;color:var(--ev-gray3);}
+.ev-contact-phone{display:flex;flex-direction:column;gap:8px;}
+.ev-cp-row{display:flex;align-items:center;gap:14px;font-size:18px;font-weight:600;}
+.ev-cp-row .ev-ic{width:20px;height:20px;color:var(--ev-gray3);}
+.ev-callback{margin-left:34px;font-size:16px;color:var(--ev-green);text-decoration:underline;cursor:pointer;}
+.ev-cart{display:flex;flex-direction:column;align-items:center;gap:6px;cursor:pointer;}
+.ev-cart .ev-cart-top{position:relative;width:55px;height:36px;}
+.ev-cart .ev-ic--cart{width:24px;height:24px;color:var(--ev-gray3);position:absolute;left:0;top:8px;}
+.ev-cart .ev-badge{position:absolute;right:0;top:0;width:35px;height:35px;border-radius:50%;
+  background:var(--ev-green);color:#fff;display:flex;align-items:center;justify-content:center;font-size:17px;}
+.ev-cart .ev-cart-label{font-size:18px;font-weight:600;color:var(--ev-green);}
+
+/* ---- Оверлей каталога (мега-меню) ---- */
+.ev-catoverlay{position:fixed;inset:var(--ev-header-h) 0 0 0;z-index:55;display:none;}
+.ev-catoverlay.is-open{display:block;}
+.ev-catoverlay .ev-catscrim{position:absolute;inset:0;background:rgba(83,83,85,.35);}
+.ev-catpanel{position:relative;background:#fff;border-radius:0 0 var(--ev-radius) var(--ev-radius);
+  box-shadow:var(--ev-shadow);max-width:var(--ev-maxw);margin:0 auto;padding:44px var(--ev-gut) 56px;
+  max-height:calc(100vh - var(--ev-header-h));overflow:auto;}
+.ev-cattitle{font-size:34px;font-weight:600;color:var(--ev-green);margin:0 0 14px;}
+.ev-cattitle-rule{height:2px;background:var(--ev-green);opacity:.5;margin-bottom:30px;}
+.ev-catgrid{display:grid;grid-template-columns:340px 1fr;gap:48px;align-items:start;}
+.ev-catlist{display:flex;flex-direction:column;}
+.ev-catlist a{font-size:20px;padding:9px 0;color:#000;transition:color .15s;border-bottom:1px solid transparent;}
+.ev-catlist a:hover,.ev-catlist a.is-active{color:var(--ev-green);}
+.ev-catright{display:flex;flex-direction:column;gap:28px;}
+.ev-cathero{height:200px;border-radius:var(--ev-radius);position:relative;overflow:hidden;
+  background:linear-gradient(110deg,#5cb33a,#3c8c22);display:flex;align-items:center;padding:0 48px;}
+.ev-cathero h3{color:#fff;font-size:34px;font-weight:600;margin:0;max-width:54%;line-height:1.18;position:relative;z-index:2;}
+/* \u0444\u043e\u0442\u043e \u0441\u043f\u0440\u0430\u0432\u0430 \u0441 \u0414\u0418\u0410\u0413\u041e\u041d\u0410\u041b\u042c\u041d\u042b\u041c \u0441\u0442\u044b\u043a\u043e\u043c: \u043f\u043e\u043b\u0443\u043f\u0440\u043e\u0437\u0440\u0430\u0447\u043d\u043e\u0441\u0442\u044c \u043d\u0430 \u0434\u0438\u0430\u0433\u043e\u043d\u0430\u043b\u0438,
+   \u0442\u0435\u043a\u0441\u0442 (z-index:2) \u043d\u0435\u043c\u043d\u043e\u0433\u043e \u0437\u0430\u0435\u0437\u0436\u0430\u0435\u0442 \u043d\u0430 \u043a\u0430\u0440\u0442\u0438\u043d\u043a\u0443 \u0432 \u0437\u043e\u043d\u0435 \u0441\u0442\u044b\u043a\u0430 */
+.ev-cathero .ev-cathero-img{position:absolute;right:0;top:0;bottom:0;width:58%;object-fit:cover;z-index:1;
+  -webkit-mask-image:linear-gradient(108deg,transparent 14%,rgba(0,0,0,.5) 30%,#000 46%);
+  mask-image:linear-gradient(108deg,transparent 14%,rgba(0,0,0,.5) 30%,#000 46%);}
+.ev-catsubs{columns:2;column-gap:48px;}
+.ev-catsubs a{display:flex;align-items:center;justify-content:space-between;gap:10px;
+  font-size:20px;padding:11px 0;break-inside:avoid;color:#000;transition:color .15s;}
+.ev-catsubs a:hover{color:var(--ev-green);}
+.ev-catsubs a .ev-ic{width:8px;height:13px;color:var(--ev-green);}
+
+@media(max-width:1340px){
+  :root{--ev-gut:28px;}
+  .ev-topbar .ev-wrap{gap:16px;font-size:14px;}
+  .ev-header .ev-wrap{gap:18px;}
+  .ev-htools{gap:24px;}
+  .ev-contacts{gap:24px;}
+  .ev-cp-row,.ev-contact-mail{font-size:16px;}
+}
+@media(max-width:1100px){
+  .ev-contacts,.ev-cart .ev-cart-label{display:none;}
+  .ev-search{max-width:none;}
+}
+/* бургер-режим < 1024px (см. handoff §5) */
+@media(max-width:1024px){
+  .ev-topbar{display:none;}
+  .ev-header{box-shadow:0 4px 18px rgba(79,79,79,.14);}
+  .ev-header .ev-wrap{height:64px;gap:14px;}
+  .ev-logo{width:auto;flex:1;}
+  .ev-logo .ev-logo-mark{height:20px;}
+  .ev-logo .ev-logo-tag{display:none;}
+  /* десктоп-инструменты прячем, показываем мобильный ряд иконок */
+  .ev-catbtn{display:none;}
+  .ev-search{display:none;}
+  .ev-htools{display:none;}
+  .ev-mtools{display:flex;align-items:center;gap:6px;margin-left:auto;flex:none;}
+  .ev-catoverlay{inset:64px 0 0 0;}
+  .ev-catpanel{padding:22px 18px 40px;border-radius:0;}
+  .ev-catgrid{grid-template-columns:1fr;gap:24px;}
+  .ev-cattitle{font-size:24px;}
+  .ev-cathero{display:none;}
+  .ev-catsubs{columns:1;}
+  .ev-catlist a,.ev-catsubs a{font-size:17px;padding:12px 0;border-bottom:1px solid var(--ev-line);}
+}
+
+/* ============================================================
+   Мобильные иконки в шапке (< 1024px): телефон, поиск, корзина, бургер
+   ============================================================ */
+.ev-mtool{position:relative;width:44px;height:44px;border-radius:10px;display:flex;align-items:center;justify-content:center;background:none;flex:none;}
+.ev-mtool .ev-ic{width:24px;height:24px;}
+.ev-mtool--phone .ev-ic{color:var(--ev-green);}
+.ev-mtool--search .ev-ic{color:var(--ev-gray3);}
+.ev-mtool--cart .ev-ic{color:var(--ev-green);}
+.ev-mtool--cart .ev-badge{position:absolute;top:2px;right:2px;min-width:18px;height:18px;padding:0 4px;border-radius:9px;
+  background:var(--ev-orange);color:#fff;font-size:11px;font-weight:700;display:flex;align-items:center;justify-content:center;}
+.ev-mtool--burger{background:var(--ev-green);}
+.ev-mtool--burger:active{background:var(--ev-green-d);}
+.ev-mburger{width:22px;height:16px;position:relative;}
+.ev-mburger span{position:absolute;left:0;width:22px;height:2px;background:#fff;border-radius:2px;transition:.25s;}
+.ev-mburger span:nth-child(1){top:0;}
+.ev-mburger span:nth-child(2){top:7px;}
+.ev-mburger span:nth-child(3){top:14px;}
+.ev-mtool--burger.is-open .ev-mburger span:nth-child(1){top:7px;transform:rotate(45deg);}
+.ev-mtool--burger.is-open .ev-mburger span:nth-child(2){opacity:0;}
+.ev-mtool--burger.is-open .ev-mburger span:nth-child(3){top:7px;transform:rotate(-45deg);}
+
+/* ============================================================
+   Мобильное многоуровневое меню (.ev-mmenu)
+   ============================================================ */
+.ev-mmenu{position:fixed;inset:64px 0 0 0;z-index:58;display:none;}
+.ev-mmenu.is-open{display:block;}
+.ev-mscrim{position:absolute;inset:0;background:rgba(83,83,85,.25);}
+.ev-mpanel{position:absolute;inset:0;background:#fff;display:flex;flex-direction:column;}
+.ev-msearch{flex:none;display:flex;align-items:center;gap:12px;margin:16px;padding:0 18px;height:52px;
+  background:var(--ev-bg);border-radius:12px;}
+.ev-msearch .ev-ic--search{width:20px;height:20px;color:var(--ev-gray3);}
+.ev-msearch input{flex:1;border:none;background:none;outline:none;font-size:17px;color:#333;min-width:0;}
+.ev-msearch input::placeholder{color:var(--ev-gray);}
+.ev-msearch-btn{background:none;color:var(--ev-green);font-weight:600;font-size:17px;flex:none;}
+
+.ev-mviewport{flex:1;overflow:hidden;position:relative;}
+.ev-mslider{display:flex;width:300%;height:100%;transition:transform .3s cubic-bezier(.2,.8,.2,1);}
+.ev-mslider[data-level="main"]{transform:translateX(0);}
+.ev-mslider[data-level="catalog"]{transform:translateX(-33.3333%);}
+.ev-mslider[data-level="cat"]{transform:translateX(-66.6666%);}
+.ev-mlevel{width:33.3333%;height:100%;overflow-y:auto;padding:0 16px 16px;}
+
+.ev-mrow{display:flex;align-items:center;justify-content:space-between;gap:12px;
+  padding:15px 0;font-size:17px;color:#000;border-bottom:1px solid var(--ev-line);}
+.ev-mrow .ev-ic--arrow{width:8px;height:13px;color:var(--ev-gray3);flex:none;}
+.ev-mrow--catalog{font-weight:600;}
+.ev-mrow--catalog .ev-ic--arrow{color:var(--ev-green);}
+.ev-mlevel--main .ev-mrow:last-child{border-bottom:none;}
+.ev-mdiv{height:1px;background:var(--ev-line);margin:6px 0;}
+.ev-mback{display:flex;align-items:center;gap:12px;padding:15px 0;font-size:17px;font-weight:600;
+  color:var(--ev-green);border-bottom:1px solid var(--ev-line);}
+.ev-mback .ev-ic--arrow{width:8px;height:13px;color:var(--ev-green);transform:rotate(180deg);flex:none;}
+.ev-mrow--active{color:var(--ev-green);font-weight:600;background:var(--ev-bg);
+  margin:0 -16px;padding-left:16px;padding-right:16px;border-bottom:none;}
+.ev-mrow--active .ev-ic--arrow{transform:rotate(180deg);color:var(--ev-green);}
+
+/* аккордеон фильтра в уровне категории */
+.ev-macc{border-bottom:1px solid var(--ev-line);}
+.ev-macc-head{display:flex;align-items:center;justify-content:space-between;width:100%;background:none;
+  padding:16px 0;font-size:17px;color:#000;}
+.ev-macc.is-open .ev-macc-head{color:var(--ev-green);}
+.ev-macc-chev{width:12px;height:8px;flex:none;position:relative;}
+.ev-macc-chev::before{content:"";position:absolute;inset:0;margin:auto;width:9px;height:9px;
+  border-right:2px solid currentColor;border-bottom:2px solid currentColor;transform:rotate(45deg);top:-3px;}
+.ev-macc.is-open .ev-macc-chev::before{transform:rotate(-135deg);top:1px;}
+.ev-macc-body{display:none;flex-direction:column;gap:14px;padding:0 0 16px 4px;}
+.ev-macc.is-open .ev-macc-body{display:flex;}
+.ev-macc-body a{position:relative;padding-left:18px;font-size:16px;color:#000;text-decoration:underline;}
+.ev-macc-body a::before{content:"";position:absolute;left:2px;top:50%;width:4px;height:4px;border-radius:50%;background:#000;transform:translateY(-50%);}
+.ev-macc-body a:hover{color:var(--ev-green);}
+
+.ev-mfoot{flex:none;background:var(--ev-bg);text-align:center;padding:26px 16px 30px;}
+.ev-mfoot-phone{font-size:24px;font-weight:700;color:var(--ev-green);}
+.ev-mfoot-sub{font-size:14px;color:var(--ev-gray);margin-top:2px;}
+.ev-mfoot-mail{display:inline-block;font-size:22px;font-weight:700;color:var(--ev-green);margin-top:14px;}
+.ev-mfoot-soc{display:flex;justify-content:center;gap:18px;margin-top:18px;}
+.ev-mfoot-soc .ev-soc{width:44px;height:44px;border-radius:50%;background:var(--ev-green);display:flex;align-items:center;justify-content:center;}
+.ev-mfoot-soc .ev-soc .ev-ic{color:#fff;}
+.ev-mfoot-soc .ev-soc .ev-ic--vk{width:24px;height:20px;}
+.ev-mfoot-soc .ev-soc .ev-ic--tg{width:26px;height:17px;}
+
+/* узкие экраны: ужимаем логотип и иконки, чтобы ряд влезал */
+@media(max-width:560px){
+  .ev-header .ev-wrap{gap:8px;}
+  .ev-logo .ev-logo-mark{height:16px;}
+  .ev-mtool{width:40px;height:40px;}
+  .ev-mtool .ev-ic{width:22px;height:22px;}
+  .ev-mtools{gap:2px;}
+}
+
+/* ============================================================
+   Поиск: интеграция bitrix:search.title
+   Скрываем форму компонента (#bx-title-search), оставляем
+   только JS автодополнение привязанное к #ev-search-q.
+   ============================================================ */
+.ev-scope #bx-title-search { display: none; }
+.ev-scope .ev-search { position: relative; }
+
+/* Выпадающий блок автодополнения позиционируем под формой */
+.ev-scope .popup-window-container-for-ev-search-wrap { position: absolute !important; top: 100% !important; left: 0 !important; z-index: 500; }
+
+/* Кнопка «Найти» — сброс стилей кнопки Битрикса */
+.ev-scope .ev-search button.ev-find{background:none;border:none;cursor:pointer;display:flex;align-items:center;gap:6px;font-family:inherit;color:var(--ev-green);font-size:16px;font-weight:500;padding:0;}
+.ev-scope .ev-search button.ev-find:hover{color:var(--ev-green-d);}
+
+/* Скрываем форму компонента search.title — нужен только JS редирект */
+.ev-scope #ev-search-container { display: none; }
+
+/* Панели каталога — переключаемые блоки правой части оверлея */
+.ev-catpane { display: none; }
+.ev-catpane.is-active { display: flex; flex-direction: column; gap: 28px; }

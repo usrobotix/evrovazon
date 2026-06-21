@@ -1,0 +1,78 @@
+<!-- ============================================================
+     ПАРТИАЛ: header.php (тело шапки)
+     Десктоп .ev-header  ·  моб. режим < 1024px (бургер)
+     Подключить CSS: ev-base.css, ev-header.css
+     Подключить JS:  ev-core.js, ev-catalog-menu.js
+     ─────────────────────────────────────────────────────────
+     В Bitrix:
+       • верхнее меню .ev-topbar       → bitrix:menu "top_menu"
+       • поиск .ev-search              → bitrix:search.title / search.form
+       • корзина .ev-cart              → bitrix:sale.basket.basket.small
+       • кнопка «Каталог» .ev-catbtn   → открывает оверлей catalog_menu_button
+     Значения телефона/почты вынести в Битрикс-настройки или includes.
+     ============================================================ -->
+
+<div class="ev-topbar">
+  <div class="ev-wrap">
+    <a href="/">Главная</a>
+    <a href="/about/">О нас</a>
+    <a href="/projects/">Проекты</a>
+    <a href="/technology/">Технологии</a>
+    <a href="/news/">Новости</a>
+    <a href="/delivery/">Доставка / Оплата</a>
+    <a href="/warranty/">Гарантия</a>
+    <a href="/certificates/">Сертификаты</a>
+    <a href="/reviews/">Отзывы</a>
+    <a href="/faq/">Вопрос-ответ</a>
+  </div>
+</div>
+
+<header class="ev-header">
+  <div class="ev-wrap">
+    <a class="ev-logo" href="/">
+      <span class="ev-logo-mark"><img src="template/images/logo.svg" alt="EUROVAZON"></span>
+      <span class="ev-logo-tag"><img src="template/images/tagline.svg" alt="Производство малых архитектурных форм"></span>
+    </a>
+
+    <button class="ev-catbtn" id="evCatBtn" type="button" aria-label="Каталог">
+      <span class="ev-burger"><span></span><span></span><span></span></span>
+      <span class="ev-catbtn-t">Каталог</span>
+    </button>
+
+    <form class="ev-search" action="/search/" method="get" onsubmit="return false">
+      <span class="ev-ic ev-ic--search"></span>
+      <input type="text" name="q" placeholder="Быстрый поиск">
+      <span class="ev-find"><span class="ev-ic ev-ic--enter"></span>Найти</span>
+    </form>
+
+    <div class="ev-htools">
+      <div class="ev-contacts">
+        <div class="ev-contact-mail"><span class="ev-ic ev-ic--mail"></span><a href="mailto:info@eurovazon.com">info@eurovazon.com</a></div>
+        <div class="ev-contact-phone">
+          <div class="ev-cp-row"><span class="ev-ic ev-ic--phone"></span><a href="tel:+78124160603">+7 (812) 416-06-03</a></div>
+          <a class="ev-callback" href="#">Заказать звонок</a>
+        </div>
+      </div>
+      <div class="ev-cart" id="evCart">
+        <div class="ev-cart-top">
+          <span class="ev-ic ev-ic--cart"></span>
+          <span class="ev-badge" id="evCartBadge">0</span>
+        </div>
+        <span class="ev-cart-label">Ваш заказ</span>
+      </div>
+    </div>
+
+    <!-- ============================================================
+         Мобильные инструменты (видны < 1024px): телефон, поиск,
+         корзина, бургер «Меню». Бургер открывает многоуровневое
+         мобильное меню (.ev-mmenu) — НЕ оверлей каталога.
+         В Bitrix: телефон/корзина — те же значения, что десктоп.
+         ============================================================ -->
+    <div class="ev-mtools">
+      <a class="ev-mtool ev-mtool--phone" href="tel:+78124160603" aria-label="Позвонить"><span class="ev-ic ev-ic--phone"></span></a>
+      <button class="ev-mtool ev-mtool--search" id="evMSearchBtn" type="button" aria-label="Поиск"><span class="ev-ic ev-ic--search"></span></button>
+      <a class="ev-mtool ev-mtool--cart" href="#" aria-label="Корзина"><span class="ev-ic ev-ic--cart"></span><span class="ev-badge ev-badge--orange" id="evCartBadgeM">0</span></a>
+      <button class="ev-mtool ev-mtool--burger" id="evMenuBtn" type="button" aria-label="Меню"><span class="ev-mburger"><span></span><span></span><span></span></span></button>
+    </div>
+  </div>
+</header>

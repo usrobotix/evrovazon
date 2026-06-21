@@ -1,0 +1,340 @@
+/* ============================================================
+   ev-catalog.css — раздел (серии) + подраздел (товары)
+   ============================================================ */
+
+.ev-cat-page { padding-bottom: 80px; }
+
+/* Layout страницы: по умолчанию — одна колонка */
+.ev-cat-layout { display: grid; gap: 54px; align-items: start; }
+
+/* Страница серий: .ev-side + контент */
+.ev-cat-layout:has(.ev-side) { grid-template-columns: 300px 1fr; }
+
+/* ---- сайдбар серий (aside.ev-side) ---- */
+.ev-side { position: sticky; top: 170px; }
+.ev-side nav { display: flex; flex-direction: column; }
+.ev-side nav a { font-size: 19px; padding: 9px 0; color: #000; transition: color .15s; line-height: 1.3; }
+.ev-side nav a:hover, .ev-side nav a.is-active { color: var(--ev-green); font-weight: 600; }
+.ev-side .ev-side-title { font-size: 20px; font-weight: 700; margin: 26px 0 6px; }
+
+/* ---- Листинг: .ev-listing-wrap ----
+   По умолчанию — обычный блок (left_col пустой, right_col занимает всё).
+   Когда left_col содержит фильтр — становится двухколоночным grid. */
+.ev-listing-wrap { display: block; min-width: 0; }
+
+/* Пустой left_col — скрываем чтобы не занимал место */
+.ev-scope .ev-cat-layout .left_col.sidebar:empty { display: none !important; }
+
+/* Когда фильтр есть (left_col не пустой) — двухколоночный grid */
+.ev-scope .ev-listing-wrap:has(.left_col.sidebar > *) {
+  display: grid;
+  grid-template-columns: 280px 1fr;
+  gap: 40px;
+  align-items: start;
+}
+
+/* Убираем старый float layout */
+.ev-scope .ev-cat-layout .left_col.sidebar,
+.ev-scope .ev-cat-layout .right_col.catalog {
+  float: none !important;
+  width: auto !important;
+  padding: 0 !important;
+  box-sizing: border-box !important;
+}
+
+/* Фильтр sticky когда виден */
+.ev-scope .ev-cat-layout .left_col.sidebar {
+  position: sticky !important;
+  top: 170px !important;
+}
+
+.ev-scope .ev-cat-layout .right_col.catalog {
+  min-width: 0 !important;
+}
+
+/* ---- сетка серий ---- */
+.ev-series-grid { display: grid; grid-template-columns: repeat(3,1fr); gap: 30px; }
+.ev-series-card { background: #fff; border-radius: var(--ev-radius); box-shadow: var(--ev-shadow-s);
+  padding: 0 0 22px; display: flex; flex-direction: column; position: relative; overflow: hidden;
+  transition: transform .28s cubic-bezier(.4,0,.2,1), box-shadow .28s cubic-bezier(.4,0,.2,1); }
+.ev-series-card:hover { transform: translateY(-4px); box-shadow: var(--ev-shadow); }
+.ev-series-chip { position: absolute; left: 18px; top: 18px; z-index: 2; background: var(--ev-green); color: #fff;
+  font-size: 17px; font-weight: 600; padding: 8px 16px; border-radius: 6px; }
+.ev-series-card .ev-ph { height: 300px; display: flex; align-items: center; justify-content: center; padding: 54px 30px 10px; }
+.ev-series-card .ev-ph img { max-height: 100%; max-width: 100%; object-fit: contain; mix-blend-mode: multiply; }
+.ev-series-card .ev-cnt { padding: 0 24px; font-size: 18px; color: #000; }
+
+/* ============================================================
+   КАРТОЧКА ТОВАРА — переопределение старых классов Битрикса
+   Карточка = <form class="catalog_list_item ...">
+   Все правила под .ev-scope чтобы не ломать другие страницы
+   ============================================================ */
+
+/* Сетка карточек: 4 колонки по умолчанию */
+.ev-scope .product-container--catalog.items {
+  display: grid !important;
+  grid-template-columns: repeat(4,1fr) !important;
+  gap: 24px !important;
+  padding: 0 !important;
+  margin: 0 !important;
+}
+/* 3 колонки только когда left_col содержит фильтр (kombox) */
+.ev-scope .ev-listing-wrap:has(.left_col.sidebar > *) .product-container--catalog.items {
+  grid-template-columns: repeat(3,1fr) !important; /* !important: конфликт с styles_new.min.css */
+}
+.ev-scope .product-container--catalog.items > form,
+.ev-scope .product-container--catalog.items > div { float: none !important; width: auto !important; }
+
+/* Карточка-обёртка */
+.ev-scope form.catalog_list_item {
+  position: relative !important;
+  display: flex !important;
+  flex-direction: column !important;
+  background: #fff !important;
+  border-radius: var(--ev-radius) !important;
+  box-shadow: var(--ev-shadow-s) !important;
+  overflow: hidden !important;
+  padding: 0 !important;
+  margin: 0 !important;
+  border: none !important;
+  height: auto !important;
+  vertical-align: top !important;
+  width: auto !important;
+  transition: transform .28s cubic-bezier(.4,0,.2,1), box-shadow .28s !important;
+}
+.ev-scope form.catalog_list_item:hover { transform: translateY(-4px) !important; box-shadow: var(--ev-shadow) !important; }
+.ev-scope form.catalog_list_item .catalog_list_item_in {
+  position: static !important;
+  display: flex !important;
+  flex-direction: column !important;
+  height: 100% !important;
+  overflow: visible !important;
+}
+
+/* Блок фото */
+.ev-scope form.catalog_list_item .item_image {
+  position: relative !important;
+  width: 100% !important;
+  height: 200px !important;
+  display: flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  padding: 16px !important;
+  overflow: hidden !important;
+  flex-shrink: 0 !important;
+  background: none !important; /* !important: styles_new.min.css вешает background-image: url(loading.gif) */
+  background-image: none !important;
+  margin-bottom: 0 !important;
+}
+.ev-scope form.catalog_list_item .item_image::before { display: none !important; }
+.ev-scope form.catalog_list_item .item_image_in {
+  position: static !important;
+  display: flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  width: 100% !important;
+  height: 100% !important;
+}
+.ev-scope form.catalog_list_item .item_image img,
+.ev-scope form.catalog_list_item .item_image_in img {
+  position: static !important;
+  max-height: 160px !important;
+  max-width: 100% !important;
+  width: auto !important;
+  height: auto !important;
+  object-fit: contain !important;
+  mix-blend-mode: multiply !important;
+  display: block !important;
+  margin: 0 auto !important;
+  bottom: auto !important;
+  left: auto !important;
+  right: auto !important;
+  top: auto !important;
+}
+
+/* Гарантия — скрыть */
+.ev-scope form.catalog_list_item .item_warranty,
+.ev-scope form.catalog_list_item .item_warranty * { display: none !important; } /* !important: показывается в медиазапросах styles_new.min.css */
+
+/* Лейблы */
+.ev-scope form.catalog_list_item .item_label {
+  position: absolute !important;
+  left: 12px !important;
+  top: 12px !important;
+  z-index: 5 !important;
+}
+.ev-scope form.catalog_list_item .item_label span.new,
+.ev-scope form.catalog_list_item .item_label a.series,
+.ev-scope form.catalog_list_item .item_label span.series {
+  display: inline-block !important;
+  background: var(--ev-green) !important;
+  color: #fff !important;
+  font-size: 12px !important;
+  font-weight: 600 !important;
+  padding: 4px 10px !important;
+  border-radius: 4px !important;
+  border-bottom: none !important;
+}
+
+/* Название */
+.ev-scope form.catalog_list_item .item_name {
+  position: static !important;
+  width: 100% !important;
+  padding: 12px 16px 8px !important;
+  flex-grow: 1 !important;
+  overflow: hidden !important;
+  text-align: left !important;
+  box-sizing: border-box !important;
+}
+.ev-scope form.catalog_list_item .item_name a {
+  font-size: 15px !important;
+  font-weight: 600 !important;
+  color: var(--ev-green) !important;
+  line-height: 1.3 !important;
+  text-decoration: none !important;
+  border-bottom: none !important;
+  display: -webkit-box !important;
+  -webkit-line-clamp: 3 !important;
+  -webkit-box-orient: vertical !important;
+  overflow: hidden !important;
+}
+.ev-scope form.catalog_list_item .item_name a:hover { color: var(--ev-green-d,#2d7a1a) !important; }
+
+/* Цена + кнопка */
+.ev-scope form.catalog_list_item .item_descr {
+  position: static !important;
+  display: flex !important;
+  flex-direction: row !important;
+  align-items: center !important;
+  justify-content: space-between !important;
+  gap: 8px !important;
+  padding: 10px 16px 12px !important;
+  margin: 0 !important;
+  overflow: visible !important;
+  width: 100% !important;
+  box-sizing: border-box !important;
+  text-align: left !important;
+}
+.ev-scope form.catalog_list_item .item_price {
+  font-size: 18px !important;
+  font-weight: 700 !important;
+  color: var(--ev-ink,#1a1a1a) !important;
+  white-space: nowrap !important;
+  padding: 0 !important;
+  margin: 0 !important;
+  flex-shrink: 1 !important;
+  min-width: 0 !important;
+  text-align: left !important;
+}
+.ev-scope form.catalog_list_item .product-block__price-old {
+  font-size: 12px !important;
+  color: var(--ev-gray,#888) !important;
+  text-decoration: line-through !important;
+}
+
+/* Кнопка «В корзину» */
+.ev-scope form.catalog_list_item a.button-buy { display: none !important; }
+.ev-scope form.catalog_list_item a.button-buy.active {
+  display: inline-flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  height: 38px !important;
+  padding: 0 14px !important;
+  background: var(--ev-green) !important;
+  color: #fff !important;
+  font-size: 13px !important;
+  font-weight: 600 !important;
+  border-radius: 8px !important;
+  border-bottom: none !important;
+  white-space: nowrap !important;
+  flex-shrink: 0 !important;
+  width: auto !important;
+  cursor: pointer !important;
+}
+.ev-scope form.catalog_list_item a.button-buy.active:hover { background: var(--ev-green-d,#2d7a1a) !important; color: #fff !important; }
+
+/* Счётчик */
+.ev-scope form.catalog_list_item .counter-block { display: none !important; }
+.ev-scope form.catalog_list_item .counter-block.active {
+  display: flex !important;
+  align-items: center !important;
+  gap: 2px !important;
+}
+.ev-scope form.catalog_list_item .counter-block__remove,
+.ev-scope form.catalog_list_item .counter-block__add {
+  width: 30px !important; height: 30px !important;
+  display: flex !important; align-items: center !important; justify-content: center !important;
+  background: var(--ev-bg,#f4f5f0) !important;
+  border-radius: 6px !important;
+  font-size: 18px !important;
+  color: var(--ev-green) !important;
+  border-bottom: none !important;
+  cursor: pointer !important;
+}
+.ev-scope form.catalog_list_item .counter-block__input {
+  width: 38px !important; height: 30px !important;
+  text-align: center !important;
+  font-size: 15px !important;
+  font-weight: 600 !important;
+  border: 1px solid var(--ev-gray3,#ddd) !important;
+  border-radius: 4px !important;
+  background: #fff !important;
+}
+
+/* Характеристики */
+.ev-scope form.catalog_list_item .item_options {
+  display: flex !important;
+  flex-wrap: wrap !important;
+  gap: 4px 10px !important;
+  padding: 0 16px 10px !important;
+  text-align: left !important;
+  width: 100% !important;
+  box-sizing: border-box !important;
+}
+.ev-scope form.catalog_list_item .item_options .option_item {
+  display: flex !important;
+  align-items: center !important;
+  gap: 3px !important;
+  width: auto !important;
+  padding: 0 !important;
+}
+.ev-scope form.catalog_list_item .item_options .item_img img { width: 13px !important; height: 13px !important; }
+.ev-scope form.catalog_list_item .item_options span { font-size: 12px !important; color: var(--ev-gray,#888) !important; }
+.ev-scope form.catalog_list_item .item_options .col-xs-12 { display: none !important; }
+
+/* НДС/гарантия внизу — скрыть */
+.ev-scope form.catalog_list_item .item_info { display: none !important; }
+
+/* Отзывы на странице листинга рендерятся после .ev-listing-wrap вне grid.
+   Добавляем отступ и убираем случайный разъезд. */
+.ev-cat-page .ev-review { margin-top: 32px; }
+.ev-cat-page .ev-review:first-of-type { margin-top: 48px; }
+
+/* ============================================================
+   АДАПТИВ
+   ============================================================ */
+
+/* 1200px: 3 колонки / 2 при фильтре */
+@media(max-width:1200px) {
+  .ev-scope .product-container--catalog.items { grid-template-columns: repeat(3,1fr) !important; }
+  .ev-scope .ev-listing-wrap:has(.left_col.sidebar > *) .product-container--catalog.items { grid-template-columns: repeat(2,1fr) !important; }
+}
+
+/* 1024px: одна колонка, сайдбары горизонтально */
+@media(max-width:1024px) {
+  .ev-cat-layout { grid-template-columns: 1fr !important; gap: 24px; }
+  .ev-cat-layout:has(.ev-side) { grid-template-columns: 1fr !important; }
+  .ev-scope .ev-listing-wrap:has(.left_col.sidebar > *) { grid-template-columns: 1fr !important; gap: 16px; }
+  .ev-side { position: static; margin-bottom: 8px; border-bottom: 1px solid var(--ev-line); padding-bottom: 8px; }
+  .ev-side nav { flex-direction: row; flex-wrap: wrap; gap: 0 18px; }
+  .ev-side nav a { font-size: 15px; padding: 7px 0; }
+  .ev-scope .ev-cat-layout .left_col.sidebar { position: static !important; border-bottom: 1px solid var(--ev-line); padding-bottom: 16px !important; }
+}
+
+/* 768px: 2 колонки карточек */
+@media(max-width:768px) {
+  .ev-scope .product-container--catalog.items { grid-template-columns: repeat(2,1fr) !important; gap: 12px !important; }
+  .ev-scope form.catalog_list_item .item_image { height: 150px !important; }
+  .ev-scope form.catalog_list_item .item_price { font-size: 15px !important; }
+  .ev-series-grid { grid-template-columns: 1fr 1fr; gap: 14px; }
+}

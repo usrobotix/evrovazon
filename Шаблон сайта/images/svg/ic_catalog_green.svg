@@ -1,0 +1,17 @@
+<svg id="Каталог" xmlns="http://www.w3.org/2000/svg" width="100" height="100" viewBox="0 0 100 100">
+  <defs>
+    <style>
+      .cls-1 {
+        fill: #fff;
+        stroke: #46a128;
+        stroke-linejoin: bevel;
+        stroke-width: 4px;
+        fill-rule: evenodd;
+      }
+    </style>
+  </defs>
+  <rect id="Прямоугольник_скругл._углы_1_копия_3" data-name="Прямоугольник, скругл. углы 1 копия 3" class="cls-1" x="17.5" y="56" width="27.5" height="27.5" rx="3" ry="3"/>
+  <rect id="Прямоугольник_скругл._углы_1_копия_2" data-name="Прямоугольник, скругл. углы 1 копия 2" class="cls-1" x="55" y="56" width="27.5" height="27.5" rx="3" ry="3"/>
+  <rect id="Прямоугольник_скругл._углы_1" data-name="Прямоугольник, скругл. углы 1" class="cls-1" x="17.5" y="18.5" width="27.5" height="27.5" rx="3" ry="3"/>
+  <rect id="Прямоугольник_скругл._углы_1_копия" data-name="Прямоугольник, скругл. углы 1 копия" class="cls-1" x="55" y="18.5" width="27.5" height="27.5" rx="3" ry="3"/>
+</svg>

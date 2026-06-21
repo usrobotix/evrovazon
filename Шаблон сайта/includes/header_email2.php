@@ -1,0 +1,3 @@
+<span class="app-header__phone">
+	<a href="mailto:info@eurovazon.com" style = 'text-transform: initial;'>info@eurovazon.com</a>
+</span>

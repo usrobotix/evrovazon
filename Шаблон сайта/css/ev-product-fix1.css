@@ -1,0 +1,211 @@
+/* ============================================================
+   ev-product.css — ПАТЧ
+   Загрузить поверх существующего файла (добавить в конец)
+   или объединить вручную.
+   ============================================================ */
+
+/* ---- SVG-иконки характеристик: фиксированный размер ---- */
+.ev-size-ic {
+  width: 28px !important;
+  height: 22px !important;
+  flex-shrink: 0 !important;
+  display: flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  overflow: hidden !important;
+}
+.ev-size-ic svg {
+  width: 100% !important;
+  height: 100% !important;
+  max-width: 28px !important;
+  max-height: 22px !important;
+  display: block !important;
+}
+
+/* ---- .ev-size-row: горизонтальная строка (иконка + текст в ряд) ---- */
+.ev-size-row {
+  display: flex !important;
+  align-items: center !important;
+  gap: 12px !important;
+  padding: 10px 16px !important;
+}
+.ev-size-cell {
+  display: flex !important;
+  flex-direction: row !important;
+  align-items: center !important;
+  gap: 8px !important;
+  text-align: left !important;
+}
+.ev-size-k {
+  font-size: 14px !important;
+  color: var(--ev-gray) !important;
+  white-space: nowrap !important;
+}
+.ev-size-v {
+  font-size: 16px !important;
+  color: #000 !important;
+  font-weight: 600 !important;
+}
+
+/* ---- Вкладки: сброс наследуемых стилей от старого CSS ---- */
+.ev-pd-tabs {
+  display: flex !important;
+  gap: 14px !important;
+  flex-wrap: wrap !important;
+  margin-top: 10px !important;
+  list-style: none !important;
+  padding: 0 !important;
+}
+.ev-pd-tabs a.ev-pd-tab,
+a.ev-pd-tab {
+  display: inline-flex !important;
+  align-items: center !important;
+  background: var(--ev-gray3) !important;
+  color: #fff !important;
+  border-radius: 8px 8px 0 0 !important;
+  padding: 0 30px !important;
+  height: 54px !important;
+  font-size: 19px !important;
+  font-weight: 500 !important;
+  text-decoration: none !important;
+  cursor: pointer !important;
+  transition: background .15s !important;
+  border: none !important;
+}
+.ev-pd-tabs a.ev-pd-tab:hover { background: #8f8f95 !important; }
+.ev-pd-tabs a.ev-pd-tab.is-active { background: var(--ev-green) !important; color: #fff !important; }
+
+/* ---- Панели вкладок ---- */
+.ev-pd-tabpanes {
+  background: #fff !important;
+  border-radius: 0 var(--ev-radius) var(--ev-radius) var(--ev-radius) !important;
+  box-shadow: var(--ev-shadow-s) !important;
+  padding: 36px 40px !important;
+}
+.ev-pd-pane { display: none !important; }
+.ev-pd-pane.is-active { display: block !important; }
+
+/* ---- ul.ev-swatches — сброс стилей списка ---- */
+ul.ev-swatches {
+  list-style: none !important;
+  padding: 0 !important;
+  margin: 0 0 16px 0 !important;
+  display: flex !important;
+  flex-wrap: wrap !important;
+  gap: 14px !important;
+}
+li.ev-swatch {
+  width: 64px !important;
+  height: 64px !important;
+  border-radius: 8px !important;
+  cursor: pointer !important;
+  border: 2px solid transparent !important;
+  outline: 2px solid var(--ev-line, #ddd) !important;
+  outline-offset: -2px !important;
+  transition: .15s !important;
+  display: block !important;
+  flex-shrink: 0 !important;
+}
+li.ev-swatch.is-sel,
+li.ev-swatch.selected {
+  border-color: var(--ev-green) !important;
+  outline-color: var(--ev-green) !important;
+}
+li.ev-swatch--sell { position: relative; }
+li.ev-swatch--sell::after {
+  content: 'Скидка';
+  position: absolute;
+  bottom: -22px;
+  left: 0;
+  width: 100%;
+  background: orange;
+  color: #000;
+  font-size: 11px;
+  padding: 2px 4px;
+  box-sizing: border-box;
+  text-align: center;
+  border-radius: 4px;
+}
+li.ev-pd-sel {
+  display: inline-flex !important;
+  align-items: center !important;
+  padding: 8px 16px !important;
+  border-radius: 8px !important;
+  border: 2px solid var(--ev-line, #ddd) !important;
+  cursor: pointer !important;
+  font-size: 16px !important;
+  color: #000 !important;
+  background: #fff !important;
+  transition: .15s !important;
+  list-style: none !important;
+}
+li.ev-pd-sel:hover { border-color: var(--ev-green) !important; }
+li.ev-pd-sel.is-sel,
+li.ev-pd-sel.selected {
+  border-color: var(--ev-green) !important;
+  background: var(--ev-green) !important;
+  color: #fff !important;
+}
+
+/* ---- Кнопки: белый текст ---- */
+.ev-btn { color: #fff !important; }
+.ev-btn--gray {
+  background: #b0b0b8 !important;
+  color: #fff !important;
+}
+.ev-btn--gray:hover { background: #8f8f95 !important; }
+
+/* ---- Стрелки Swiper — убираем дефолтные ---- */
+.ev-pd-rail .swiper-button-next,
+.ev-pd-rail .swiper-button-prev { display: none !important; }
+
+/* ---- Цена: фиксируем font-size который Bitrix перебивает ---- */
+.ev-pd-price {
+  font-size: 46px !important;
+  font-weight: 700 !important;
+  letter-spacing: -1px !important;
+  line-height: 1 !important;
+}
+.ev-pd-price-old {
+  font-size: 22px !important;
+  color: var(--ev-gray) !important;
+  text-decoration: line-through !important;
+}
+
+/* ---- Галерея: фото заполняет контейнер ---- */
+.ev-pd-zoom {
+  display: flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  width: 100% !important;
+  height: 100% !important;
+}
+.ev-pd-zoom img {
+  max-width: 100% !important;
+  max-height: 528px !important;
+  object-fit: contain !important;
+  width: auto !important;
+  height: auto !important;
+}
+
+/* ---- Похожие товары: 4 колонки ---- */
+.ev-related .ev-scope .product-container--catalog.items,
+.ev-related .ev-scope .product-container.catalog_recommend {
+  display: grid !important;
+  grid-template-columns: repeat(4, 1fr) !important;
+  gap: 24px !important;
+  list-style: none !important;
+  padding: 0 !important;
+}
+@media(max-width:1200px) {
+  .ev-related .ev-scope .product-container--catalog.items,
+  .ev-related .ev-scope .product-container.catalog_recommend {
+    grid-template-columns: repeat(3, 1fr) !important;
+  }
+}
+@media(max-width:768px) {
+  .ev-related .ev-scope .product-container--catalog.items,
+  .ev-related .ev-scope .product-container.catalog_recommend {
+    grid-template-columns: repeat(2, 1fr) !important;
+  }
+}

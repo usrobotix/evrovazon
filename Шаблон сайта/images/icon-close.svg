@@ -1,0 +1,16 @@
+<svg id="Группа_4" data-name="Группа 4" xmlns="http://www.w3.org/2000/svg" width="40" height="40" viewBox="0 0 40 40">
+  <defs>
+    <style>
+      .cls-1 {
+        fill: #46a128;
+      }
+
+      .cls-2 {
+        fill: #fff;
+        fill-rule: evenodd;
+      }
+    </style>
+  </defs>
+  <rect class="cls-1" width="40" height="40"/>
+  <path id="Rounded_Rectangle_94_copy_4" data-name="Rounded Rectangle 94 copy 4" class="cls-2" d="M1140.52,1980.48l2.25,2.25a0.735,0.735,0,0,1-1.04,1.04l-2.25-2.25-2.25,2.25a0.73,0.73,0,0,1-1.04,0,0.749,0.749,0,0,1,0-1.04l2.25-2.25-2.25-2.25a0.735,0.735,0,0,1,1.04-1.04l2.25,2.25,2.25-2.25a0.749,0.749,0,0,1,1.04,0,0.73,0.73,0,0,1,0,1.04Z" transform="translate(-1119 -1961)"/>
+</svg>

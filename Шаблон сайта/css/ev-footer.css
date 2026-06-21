@@ -1,0 +1,42 @@
+/* ============================================================
+   ev-footer.css — подвал
+   Интеграция: footer.php (модульный, через includes/)
+   Раскладка по макету Figma: слева соц-иконки, справа колонка
+   (ряд «телефон · почта · ISO» → меню → копирайт).
+   ============================================================ */
+
+.ev-footer{background:var(--ev-dark);color:#cfcfcf;}
+.ev-footer .ev-wrap{padding-top:54px;padding-bottom:46px;display:flex;gap:48px;align-items:flex-start;}
+
+.ev-foot-soc{flex:none;display:flex;gap:16px;}
+.ev-soc{width:52px;height:52px;border-radius:50%;background:var(--ev-gray);display:flex;align-items:center;justify-content:center;transition:background .15s;}
+.ev-soc:hover{background:#fff;}
+.ev-soc .ev-ic{color:var(--ev-dark);}
+.ev-soc .ev-ic--tg{width:30px;height:19px;}
+.ev-soc .ev-ic--vk{width:28px;height:24px;}
+
+.ev-foot-main{flex:1;min-width:0;display:flex;flex-direction:column;gap:34px;}
+.ev-foot-row1{display:flex;align-items:center;gap:56px;flex-wrap:wrap;}
+.ev-foot-phone .ev-pn{font-size:26px;font-weight:700;color:#fff;}
+.ev-foot-phone .ev-pn-sub{font-size:15px;color:#aaa;margin-top:4px;}
+.ev-foot-mail{font-size:24px;color:#fff;}
+.ev-foot-iso{margin-left:auto;display:flex;align-items:center;gap:12px;}
+.ev-foot-iso img{width:50px;height:50px;border-radius:50%;}
+.ev-foot-iso span{color:#afafaf;font-size:20px;}
+
+.ev-foot-nav{display:flex;gap:90px;}
+.ev-foot-nav ul{list-style:none;margin:0;padding:0;display:flex;flex-direction:column;gap:13px;}
+.ev-foot-nav a{font-size:18px;color:#dcdcdc;transition:color .15s;}
+.ev-foot-nav a:hover{color:#fff;}
+
+.ev-foot-copy{font-size:15px;color:#9a9a9a;line-height:1.6;max-width:1180px;}
+.ev-foot-copy .ev-cc{color:#cfcfcf;}
+
+@media(max-width:1024px){
+  .ev-footer .ev-wrap{flex-direction:column;gap:28px;}
+  .ev-foot-row1{gap:24px;}
+  .ev-foot-iso{margin-left:0;}
+  .ev-foot-nav{gap:48px;flex-wrap:wrap;}
+  .ev-foot-phone .ev-pn{font-size:22px;}
+  .ev-foot-mail{font-size:20px;}
+}

@@ -1,0 +1,106 @@
+
+/* ============================================================
+   Дополнение к ev-product.css
+   Свотчи как <li> (для совместимости с JCCatalogElement)
+   + шильдик скидки + кнопка «Задать вопрос» в описании убрана
+   ============================================================ */
+
+/* ul.ev-swatches — сброс стилей списка */
+ul.ev-swatches {
+  list-style: none !important;
+  padding: 0 !important;
+  margin: 0 0 16px 0 !important;
+  display: flex !important;
+  flex-wrap: wrap !important;
+  gap: 14px !important;
+}
+
+/* li.ev-swatch — плитка цвета (аналог span.ev-swatch) */
+li.ev-swatch {
+  width: 64px;
+  height: 64px;
+  border-radius: 8px;
+  cursor: pointer;
+  border: 2px solid transparent;
+  outline: 2px solid var(--ev-line);
+  outline-offset: -2px;
+  transition: .15s;
+  display: block !important;
+}
+li.ev-swatch.is-sel,
+li.ev-swatch.selected {
+  border-color: var(--ev-green) !important;
+  outline-color: var(--ev-green) !important;
+}
+
+/* Шильдик "Скидка" для фактуры ID=10 */
+li.ev-swatch--sell {
+  position: relative;
+}
+li.ev-swatch--sell::after {
+  content: 'Скидка';
+  position: absolute;
+  bottom: -22px;
+  left: 0;
+  width: 100%;
+  background: orange;
+  color: #000;
+  font-size: 11px;
+  padding: 2px 4px;
+  box-sizing: border-box;
+  text-align: center;
+  border-radius: 4px;
+}
+
+/* li.ev-pd-sel — текстовые кнопки SKU */
+li.ev-pd-sel {
+  display: inline-flex !important;
+  align-items: center;
+  padding: 8px 16px;
+  border-radius: 8px;
+  border: 2px solid var(--ev-line);
+  cursor: pointer;
+  font-size: 16px;
+  color: #000;
+  background: #fff;
+  transition: .15s;
+}
+li.ev-pd-sel:hover { border-color: var(--ev-green); }
+li.ev-pd-sel.is-sel,
+li.ev-pd-sel.selected {
+  border-color: var(--ev-green) !important;
+  background: var(--ev-green) !important;
+  color: #fff !important;
+}
+
+/* Кнопка «Задать вопрос» в описании — убираем (она только в .ev-pd-buy) */
+.ev-pd-pane .ev-pd-ask-wrap { display: none !important; }
+
+/* Цвет текста кнопок */
+.ev-btn { color: #fff !important; }
+.ev-btn--gray { color: #fff !important; background: var(--ev-gray3) !important; }
+.ev-btn--gray:hover { background: #b0b0b8 !important; }
+
+/* Стрелки галереи: только наши стили, без дефолтного Swiper */
+.ev-pd-rail .swiper-button-next,
+.ev-pd-rail .swiper-button-prev { display: none !important; }
+
+/* ev-size-row для простых товаров (без radio-кнопки) */
+.ev-size-row .ev-size-radio[style*="visibility:hidden"] { pointer-events: none; }
+
+/* Похожие товары: карточки в 4 колонки через ev-scope */
+.ev-related .ev-scope .product-container--catalog.items {
+  display: grid !important;
+  grid-template-columns: repeat(4, 1fr) !important;
+  gap: 24px !important;
+}
+@media(max-width:1200px) {
+  .ev-related .ev-scope .product-container--catalog.items {
+    grid-template-columns: repeat(3, 1fr) !important;
+  }
+}
+@media(max-width:768px) {
+  .ev-related .ev-scope .product-container--catalog.items {
+    grid-template-columns: repeat(2, 1fr) !important;
+  }
+}

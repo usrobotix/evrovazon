@@ -1,0 +1,390 @@
+/* ============================================================
+   ev-product-fix2.css
+   Добавить в КОНЕЦ ev-product.css на сервере
+   ============================================================ */
+
+/* ---- 1. Счётчик количества: фиксируем ширину input ----
+   template_styles.css вешает input { width: 100% } глобально */
+.ev-qty {
+  display: flex !important;
+  align-items: center !important;
+  background: var(--ev-bg) !important;
+  border-radius: 10px !important;
+  height: 56px !important;
+  overflow: hidden !important;
+  width: auto !important;         /* не растягивать */
+  flex-shrink: 0 !important;
+}
+.ev-qty button {
+  width: 52px !important;
+  height: 56px !important;
+  min-width: 52px !important;
+  flex-shrink: 0 !important;
+  font-size: 26px !important;
+  background: transparent !important;
+  border: none !important;
+  cursor: pointer !important;
+  display: flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+}
+.ev-qty input[type="text"],
+.ev-qty input {
+  width: 54px !important;
+  min-width: 54px !important;
+  max-width: 54px !important;
+  height: 56px !important;
+  text-align: center !important;
+  border: none !important;
+  background: none !important;
+  font-size: 22px !important;
+  font-weight: 600 !important;
+  outline: none !important;
+  box-shadow: none !important;
+  padding: 0 !important;
+  flex-shrink: 0 !important;
+}
+
+/* ---- 2. Блок покупки: flex в строку, не переносить на следующую ----*/
+.ev-pd-buy {
+  display: flex !important;
+  align-items: center !important;
+  gap: 24px !important;
+  flex-wrap: wrap !important;
+  margin: 28px 0 !important;
+  padding-bottom: 28px !important;
+  border-bottom: 1px solid var(--ev-line) !important;
+  position: static !important;    /* снимаем возможный position: fixed */
+  z-index: auto !important;
+}
+
+/* ---- 3. Галерея: grid-порядок: фото слева, рельсы справа ---- */
+.ev-pd-gallery {
+  display: grid !important;
+  grid-template-columns: 1fr 150px !important;
+  gap: 20px !important;
+  align-items: start !important;
+  direction: ltr !important;      /* на случай RTL конфликта */
+}
+/* Главное фото — первая колонка */
+.ev-pd-main {
+  order: 1 !important;
+  background: #fff !important;
+  border-radius: var(--ev-radius) !important;
+  min-height: 400px !important;
+  height: 560px !important;
+  padding: 16px !important;
+  border: 1px solid var(--ev-line) !important;
+  overflow: hidden !important;
+  display: flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+}
+/* Рельса превью — вторая колонка */
+.ev-pd-rail {
+  order: 2 !important;
+  display: flex !important;
+  flex-direction: column !important;
+  gap: 12px !important;
+  height: 560px !important;
+}
+/* Swiper главного фото */
+.ev-pd-mainsw,
+.ev-pd-mainsw.swiper {
+  width: 100% !important;
+  height: 100% !important;
+}
+.ev-pd-mainsw .swiper-slide {
+  display: flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  height: 100% !important;
+}
+.ev-pd-zoom {
+  display: flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  width: 100% !important;
+  height: 100% !important;
+  cursor: zoom-in !important;
+  text-decoration: none !important;
+}
+.ev-pd-zoom img {
+  max-width: 100% !important;
+  max-height: 520px !important;
+  width: auto !important;
+  height: auto !important;
+  object-fit: contain !important;
+  display: block !important;
+}
+/* Swiper превью */
+.ev-pd-thumbsw {
+  flex: 1 !important;
+  width: 100% !important;
+  min-height: 0 !important;
+  overflow: hidden !important;
+}
+.ev-pd-thumbsw .swiper-slide,
+.ev-pd-thumb {
+  height: 120px !important;
+  border-radius: 8px !important;
+  border: 2px solid var(--ev-line) !important;
+  overflow: hidden !important;
+  cursor: pointer !important;
+  display: flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  background: #fff !important;
+  box-sizing: border-box !important;
+}
+.ev-pd-thumbsw .swiper-slide-thumb-active {
+  border-color: var(--ev-green) !important;
+}
+.ev-pd-thumbsw .swiper-slide img {
+  width: 100% !important;
+  height: 100% !important;
+  object-fit: cover !important;
+}
+/* Стрелки рельсы */
+.ev-arr {
+  height: 44px !important;
+  border-radius: 8px !important;
+  background: var(--ev-green) !important;
+  display: flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  cursor: pointer !important;
+  flex-shrink: 0 !important;
+}
+.ev-arr svg { color: #fff !important; width: 22px !important; height: 14px !important; }
+.ev-arr--prev { border-radius: 8px 8px 0 0 !important; }
+.ev-arr--next { border-radius: 0 0 8px 8px !important; }
+.ev-arr.swiper-button-disabled { opacity: .4 !important; cursor: default !important; }
+
+/* ---- 4. SKU: убираем font-size: 15px от Bitrix с цены ---- */
+#bx_117848907_17028_price,
+[id$="_price"].ev-pd-price,
+.ev-pd-price {
+  font-size: 46px !important;
+  font-weight: 700 !important;
+  letter-spacing: -1px !important;
+  line-height: 1.1 !important;
+}
+
+/* ---- 5. Отступы секции опций ---- */
+.ev-pd-options {
+  display: grid !important;
+  grid-template-columns: 1fr 1fr !important;
+  gap: 40px !important;
+  margin-bottom: 30px !important;
+}
+
+/* ---- 6. Адаптив ---- */
+@media(max-width:1024px) {
+  .ev-pd-gallery {
+    grid-template-columns: 1fr !important;
+  }
+  .ev-pd-rail {
+    flex-direction: row !important;
+    height: auto !important;
+    order: 2 !important;
+  }
+  .ev-pd-thumbsw .swiper-slide,
+  .ev-pd-thumb { height: 80px !important; }
+  .ev-pd-main { height: auto !important; min-height: 280px !important; }
+  .ev-pd-options { grid-template-columns: 1fr !important; }
+}
+@media(max-width:560px) {
+  .ev-pd-buy .ev-btn { flex: 1 1 100% !important; }
+}
+
+/* ---- 7. SKU клик: дочерние элементы li не перехватывают события ----
+   selectOfferProp ищет data-treevalue на target.
+   Если клик попал на текст внутри li — target не имеет data-treevalue.
+   Решение: pointer-events: none на содержимое, клик идёт на li. */
+li.ev-swatch *,
+li.ev-pd-sel * {
+  pointer-events: none !important;
+}
+
+/* Форсируем cursor на li */
+li.ev-swatch,
+li.ev-pd-sel {
+  cursor: pointer !important;
+  user-select: none !important;
+}
+
+/* Класс selected добавляет JCCatalogElement — синхронизируем с is-sel */
+li.ev-swatch.selected { border-color: var(--ev-green) !important; outline-color: var(--ev-green) !important; }
+li.ev-swatch.notallowed { opacity: .35 !important; cursor: not-allowed !important; }
+li.ev-pd-sel.selected { background: var(--ev-green) !important; color: #fff !important; border-color: var(--ev-green) !important; }
+
+/* ============================================================
+   FIX-2: layout, gallery, qty input, SKU click
+   ============================================================ */
+
+.ev-qty{display:flex!important;align-items:center!important;background:var(--ev-bg)!important;border-radius:10px!important;height:56px!important;overflow:hidden!important;width:auto!important;flex-shrink:0!important;}
+.ev-qty button{width:52px!important;min-width:52px!important;height:56px!important;flex-shrink:0!important;font-size:26px!important;background:transparent!important;border:none!important;cursor:pointer!important;display:flex!important;align-items:center!important;justify-content:center!important;}
+.ev-qty input[type="text"],.ev-qty input{width:54px!important;min-width:54px!important;max-width:54px!important;height:56px!important;text-align:center!important;border:none!important;background:none!important;font-size:22px!important;font-weight:600!important;outline:none!important;box-shadow:none!important;padding:0!important;flex-shrink:0!important;}
+
+.ev-pd-buy{display:flex!important;align-items:center!important;gap:24px!important;flex-wrap:wrap!important;margin:28px 0!important;padding-bottom:28px!important;border-bottom:1px solid var(--ev-line)!important;position:static!important;z-index:auto!important;}
+
+.ev-pd-gallery{display:grid!important;grid-template-columns:1fr 150px!important;gap:20px!important;align-items:start!important;}
+.ev-pd-main{order:1!important;background:#fff!important;border-radius:var(--ev-radius)!important;height:560px!important;padding:16px!important;border:1px solid var(--ev-line)!important;overflow:hidden!important;display:flex!important;align-items:center!important;justify-content:center!important;}
+.ev-pd-rail{order:2!important;display:flex!important;flex-direction:column!important;gap:12px!important;height:560px!important;}
+.ev-pd-mainsw,.ev-pd-mainsw.swiper{width:100%!important;height:100%!important;}
+.ev-pd-mainsw .swiper-slide{display:flex!important;align-items:center!important;justify-content:center!important;height:100%!important;}
+.ev-pd-zoom{display:flex!important;align-items:center!important;justify-content:center!important;width:100%!important;height:100%!important;cursor:zoom-in!important;text-decoration:none!important;}
+.ev-pd-zoom img{max-width:100%!important;max-height:520px!important;width:auto!important;height:auto!important;object-fit:contain!important;display:block!important;}
+.ev-pd-thumbsw{flex:1!important;width:100%!important;min-height:0!important;overflow:hidden!important;}
+.ev-pd-thumbsw .swiper-slide,.ev-pd-thumb{height:120px!important;border-radius:8px!important;border:2px solid var(--ev-line)!important;overflow:hidden!important;cursor:pointer!important;display:flex!important;align-items:center!important;justify-content:center!important;background:#fff!important;box-sizing:border-box!important;}
+.ev-pd-thumbsw .swiper-slide-thumb-active{border-color:var(--ev-green)!important;}
+.ev-pd-thumbsw .swiper-slide img{width:100%!important;height:100%!important;object-fit:cover!important;}
+.ev-arr{height:44px!important;border-radius:8px!important;background:var(--ev-green)!important;display:flex!important;align-items:center!important;justify-content:center!important;cursor:pointer!important;flex-shrink:0!important;}
+.ev-arr svg{color:#fff!important;width:22px!important;height:14px!important;}
+.ev-arr--prev{border-radius:8px 8px 0 0!important;}
+.ev-arr--next{border-radius:0 0 8px 8px!important;}
+.ev-arr.swiper-button-disabled{opacity:.4!important;cursor:default!important;}
+
+.ev-pd-price{font-size:46px!important;font-weight:700!important;letter-spacing:-1px!important;line-height:1.1!important;}
+
+.ev-pd-options{display:grid!important;grid-template-columns:1fr 1fr!important;gap:40px!important;margin-bottom:30px!important;}
+
+li.ev-swatch *,li.ev-pd-sel *{pointer-events:none!important;}
+li.ev-swatch,li.ev-pd-sel{cursor:pointer!important;user-select:none!important;}
+li.ev-swatch.selected{border-color:var(--ev-green)!important;outline-color:var(--ev-green)!important;}
+li.ev-swatch.notallowed{opacity:.35!important;cursor:not-allowed!important;}
+li.ev-pd-sel.selected{background:var(--ev-green)!important;color:#fff!important;border-color:var(--ev-green)!important;}
+
+@media(max-width:1024px){
+  .ev-pd-gallery{grid-template-columns:1fr!important;}
+  .ev-pd-rail{flex-direction:row!important;height:auto!important;order:2!important;}
+  .ev-pd-thumbsw .swiper-slide,.ev-pd-thumb{height:80px!important;}
+  .ev-pd-main{height:auto!important;min-height:280px!important;}
+  .ev-pd-options{grid-template-columns:1fr!important;}
+}
+@media(max-width:560px){.ev-pd-buy .ev-btn{flex:1 1 100%!important;}}
+
+/* ============================================================
+   FIX-3: галерея, svg-иконки, layout верхнего блока
+   ============================================================ */
+
+/* Верхний блок: галерея слева, покупка справа */
+.ev-pd-top {
+  display: grid !important;
+  grid-template-columns: 1fr 400px !important;
+  grid-template-rows: auto auto !important;
+  gap: 40px !important;
+  align-items: start !important;
+  margin-bottom: 40px !important;
+}
+.ev-pd-gallery { grid-column: 1; grid-row: 1; }
+.ev-pd-buy     { grid-column: 2; grid-row: 1; }
+.ev-pd-options { grid-column: 1 / -1; grid-row: 2; }
+
+/* Галерея: явный grid с фиксированной шириной рельсы */
+.ev-pd-gallery {
+  display: grid !important;
+  grid-template-columns: 1fr 150px !important;
+  gap: 16px !important;
+  width: 100% !important;
+}
+/* Контейнер главного фото — явная высота, overflow скрывает Swiper */
+.ev-pd-main {
+  height: 480px !important;
+  background: #fff !important;
+  border-radius: 12px !important;
+  border: 1px solid #e8e8ea !important;
+  overflow: hidden !important;
+  position: relative !important;
+}
+/* Swiper заполняет весь .ev-pd-main */
+.ev-pd-main .swiper,
+.ev-pd-main .ev-pd-mainsw {
+  position: absolute !important;
+  inset: 0 !important;
+  width: 100% !important;
+  height: 100% !important;
+}
+.ev-pd-main .swiper-slide {
+  width: 100% !important;
+  height: 100% !important;
+  display: flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+}
+.ev-pd-zoom {
+  width: 100% !important;
+  height: 100% !important;
+  display: flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+}
+.ev-pd-zoom img {
+  max-width: 100% !important;
+  max-height: 100% !important;
+  width: auto !important;
+  height: auto !important;
+  object-fit: contain !important;
+}
+/* Рельса превью */
+.ev-pd-rail {
+  display: flex !important;
+  flex-direction: column !important;
+  height: 480px !important;
+  gap: 8px !important;
+}
+.ev-pd-thumbsw {
+  flex: 1 1 0 !important;
+  overflow: hidden !important;
+  min-height: 0 !important;
+}
+.ev-pd-thumbsw .swiper-wrapper { flex-direction: column !important; }
+.ev-pd-thumb {
+  height: 100px !important;
+  min-height: 60px !important;
+  max-height: 140px !important;
+  border: 2px solid #e8e8ea !important;
+  border-radius: 8px !important;
+  overflow: hidden !important;
+  cursor: pointer !important;
+}
+.ev-pd-thumb.swiper-slide-thumb-active { border-color: #46a128 !important; }
+.ev-pd-thumb img {
+  width: 100% !important;
+  height: 100% !important;
+  object-fit: cover !important;
+}
+
+/* SVG-иконки: жёсткий размер через атрибут-подобный селектор */
+.ev-size-ic {
+  display: inline-flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  width: 28px !important;
+  height: 22px !important;
+  min-width: 28px !important;
+  flex-shrink: 0 !important;
+  overflow: hidden !important;
+}
+.ev-size-ic > svg,
+.ev-size-ic svg {
+  width: 28px !important;
+  height: 22px !important;
+  max-width: 28px !important;
+  max-height: 22px !important;
+  min-width: 0 !important;
+  flex-shrink: 0 !important;
+  display: block !important;
+}
+
+@media(max-width:1200px) {
+  .ev-pd-top { grid-template-columns: 1fr 340px !important; }
+}
+@media(max-width:900px) {
+  .ev-pd-top { grid-template-columns: 1fr !important; }
+  .ev-pd-buy { grid-column: 1; grid-row: 2; }
+  .ev-pd-options { grid-row: 3; }
+  .ev-pd-main { height: 320px !important; }
+  .ev-pd-rail { height: auto !important; flex-direction: row !important; }
+}

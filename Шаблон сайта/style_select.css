@@ -1,0 +1,609 @@
+couple_select,
+.inputs{
+	position: relative;
+	width: 100%;
+	margin: 0 auto;
+	font-size: 0;
+	margin-top: 5px;
+	margin-bottom: 15px;
+}
+.input{
+	vertical-align: top;
+	margin-top: 5px;
+    display: inline-block;
+	box-sizing: border-box;
+	line-height: 52px;
+	height: 52px;
+	border-radius: 8px;
+	overflow: hidden;
+}
+.inputs{
+	display: none;
+}
+.inputs.active{
+	display: block;
+}
+.input input{
+	background: transparent;
+}
+.input.input--left{
+	width: auto;
+    max-width: 69%;
+    min-width: 39%;
+    margin-right: 1%;
+}
+.input.input--right{
+	left:-1px;
+	width: 28%;
+	margin-left: 2%;
+    height: 100%;
+	border: solid 1px #DBDBDB;
+}
+.select_element{
+	position: relative;
+	width: 50%;
+    height: 100%;
+	margin: 0;
+	1overflow: hidden;
+	vertical-align: top;
+    display: inline-block;
+	box-sizing: border-box;
+}
+.couple_select .select--type{
+	1border-radius: 8px 0 0 8px;
+	width: 39%;
+	margin-right: 1%;
+}
+.couple_select .select--color{
+	1border-radius:  0 8px 8px 0;
+	left:-1px;
+	width: 58%;
+	margin-left: 2%;
+}
+
+
+/*aoyue-select*/
+.aoyue-select {
+	position: relative;
+    width: 100%;
+    height: 100%;
+    font-size: 0;
+	border: solid 1px #DBDBDB;
+	border-radius: 8px;
+}
+.aoyue-select.active {
+	border: solid 1px #90c550;
+}
+.aoyue-select.active > span.placeholder{
+	color: #90c550;
+}
+.aoyue-select > i.toggle {
+	position: absolute;
+    z-index: 0;
+    right: 0;
+    top: 0;
+    width: 30px;
+    height: 30px;
+    background: white;
+    border-radius: 99px 0 0 99px;
+    margin-top: 12px;
+    margin-right: 0px;
+    position: absolute;
+    color: #46A128;
+    background-image: url(/bitrix/templates/eurovazon_0720/css/../images/right-arrow-button-green.svg);
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: 15px;
+    transform: rotate(90deg);
+}
+.aoyue-select:not(:hover) > i.toggle.icon-arrow-down {
+  display: block !important;
+}
+.aoyue-select:not(:hover) > i.toggle.icon-arrow-up {
+  1display: none !important;
+}
+.aoyue-select:not(:hover) label.option > input:not(:checked) ~ span.title {
+  1display: none !important;
+}
+.aoyue-select label.option {
+	display: block;
+	overflow: hidden;
+	z-index: 1;
+	margin: 0;
+	width: 100%;
+	transition: all 0.1s ease-out;
+}
+.aoyue-select label.option span.title{
+  display: none;
+}
+.aoyue-select.active label.option span.title{
+	display: block;
+}
+.aoyue-select .aoyue-select_abs{
+	font-size: 0;
+}
+.aoyue-select.active .aoyue-select_abs{
+	position: absolute;
+	height: auto;
+    background: white;
+    z-index: 10;
+	overflow: hidden;
+	border: solid 1px #DBDBDB;
+	border-radius: 8px;
+    top: 100%;
+	left: -1px;
+    right: -1px;
+	box-shadow: 0px 5px 25px rgba(0,0,0,0.1);
+}
+.aoyue-select.active > i.toggle {
+	transform: rotate(-90deg);
+}
+.aoyue-select .title,
+.aoyue-select .placeholder {
+	position: relative;
+	display: block;
+	width: 100%;
+	height: 100%;
+	padding: 2px;
+	min-height: 52px;
+	background: white;
+	1border-top: 1px solid rgba(0, 0, 0, 0.05);
+	cursor: pointer;
+	background: transparent;
+}
+.aoyue-select > input {
+	position: absolute;
+	left: 0px;
+	top: 0px;
+	z-index: 1;
+	width: 100%;
+	height: 100%;
+	display: block;
+	display: none!important;
+	opacity: 0;
+	cursor: pointer;
+}
+.aoyue-select > input:checked ~ i.toggle.icon-arrow-down {
+  display: none;
+}
+.aoyue-select > input:checked ~ i.toggle.icon-arrow-up {
+  display: block;
+}
+.aoyue-select > input:checked div.options label.option .title {
+  display: none !important;
+}
+.aoyue-select > input:not(:checked) {
+  z-index: 4;
+}
+.aoyue-select > input:not(:checked) ~ label.option > span.title {
+  1display: none;
+}
+.aoyue-select > input:not(:checked) ~ i.toggle.icon-arrow-up {
+  1display: none;
+  z-index: 4;
+}
+.aoyue-select > input:not(:checked) ~ i.toggle.icon-arrow-down {
+  display: block;
+}
+.aoyue-select > input:disabled {
+  cursor: no-drop;
+}
+.aoyue-select > span.placeholder {
+	position: relative;
+	z-index: 0;
+	display: inline-block;
+	width: 100%;
+	color: #999;
+	border-top: 0px;
+	line-height: 52px;
+	box-sizing: border-box;
+	white-space: nowrap;
+	overflow: hidden;
+}
+.aoyue-select > span.placeholder span{
+	position: relative;
+	display: block;
+	overflow: hidden;
+	line-height: 52px;
+	white-space: nowrap;
+}
+.couple_select .select--type .aoyue-select > span.placeholder{
+	padding-left: 10px;
+}
+.couple_select .select--color .aoyue-select > span.placeholder{
+	padding-left: 70px;
+}
+.select--color .aoyue-select > span.placeholder i {
+	position: absolute;
+	width: 52px;
+	height: 52px;
+	left: 2px;
+	top: 2px;
+	border-radius: 6px;
+	box-shadow: 0px 0px 0px 1px rgba(0, 0, 0, 0.1);
+	display: inline-block;
+}
+.select--color .aoyue-select > span.placeholder i.icon {
+	box-shadow: 0px 0px 0px 1px rgba(0, 0, 0, 0);
+}
+/* .couple_select .select--color .aoyue-select > span.placeholder:before{
+	content: '';
+	position: absolute;
+	width: 52px;
+	height: 52px;
+	left: 2px;
+	top: 2px;
+	border-radius: 6px;
+	display: inline-block;
+	box-shadow: 0px 0px 0px 1px rgba(0, 0, 0, 0.1);
+} */
+
+.aoyue-select label.option span.title {
+  position: relative;
+  z-index: 2;
+  transition: background .3s ease-out;
+  1display: table;
+    text-align: left;
+}
+.couple_select .select--color .aoyue-select label.option span.title{
+	padding-left: 60px;
+}
+.aoyue-select label.option span.title span{
+    box-sizing: border-box;
+	padding: 0 10px;
+	white-space: nowrap;
+	line-height: 52px;
+}
+.aoyue-select label.option span.title span small{
+    font-size: 12px;
+	color: #9999A4;
+}
+.aoyue-select label.option span.title i.icon {
+	position: absolute;
+	width: 52px;
+	height: 52px;
+	left: 2px;
+	top: 2px;
+	border-radius: 6px;
+	display: inline-block;
+	background-size: 170%;
+}
+.aoyue-select label.option span.title i.icon.icon_white {
+	box-shadow: 0px 0px 0px 1px rgba(0, 0, 0, 0.1);
+}
+.aoyue-select label.option span.title:hover {
+  background: rgba(0,0,0,0.05);
+}
+.aoyue-select label.option input {
+  display: none;
+}
+.aoyue-select label.option input:checked2 ~ span.title,
+.aoyue-select label.option input.activ2e ~ span.title {
+	position: absolute;
+	display: block;
+	z-index: 3;
+	top: 0px;
+	font-size: 18px;
+	background: #fff;
+	overflow: hidden;
+	border-radius: 10px;
+	border-top: 0px;
+	box-shadow: none;
+	color: inherit;
+	width: 100%;
+}
+.aoyue-select label.option input:checked ~ span.title{
+	color:red!important;
+	display:none!important
+}
+.aoyue-select.active .aoyue-select_abs label.option input.active ~ span.title{
+	position: relative;
+	z-index: 1;
+}
+.aoyue-select label.option input:checked ~ span.title span{
+	line-height: 52px;
+	height: 52px;
+	display: inline-block;
+	vertical-align: top;
+	width: auto;
+}
+.aoyue-select label.option input:disabled ~ span.title {
+  background: #f9f9f9 !important;
+  color: #aaa;
+}
+.aoyue-select label.option input:disabled ~ span.title:hover {
+  color: #aaa;
+  background: none;
+  cursor: no-drop;
+}
+@media screen and (max-width: 550px){
+	.couple_select .select--type,
+	.couple_select .select--color {
+		width: 100%;
+		margin: 0;
+	}
+	.couple_select .select--type .aoyue-select{
+		border-radius: 8px 8px 0 0;
+	}
+	.couple_select .select--color .aoyue-select{
+		border-radius: 0 0 8px 8px;
+		border-top: none;
+		left: 1px;
+	}
+}
+
+/*label-select*/
+.label-select {
+	position: relative;
+    width: 100%;
+    height: 100%;
+    font-size: 18px;
+    1border: solid 1px #DBDBDB;
+    1border-radius: 8px;
+}
+.label-select > i.toggle {
+	position: absolute;
+    z-index: 4;
+    right: 0;
+    top: 0;
+    width: 30px;
+    height: 30px;
+    background: white;
+	1box-shadow: 0 0 10px 10px white;
+    border-radius: 99px;
+    margin-top: 12px;
+    margin-right: 3px;
+    position: absolute;
+    color: #46A128;
+    background-image: url(/bitrix/templates/eurovazon_0720/css/../images/right-arrow-button-green.svg);
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: 15px;
+    transform: rotate(90deg);
+}
+.label-select:not(:hover) > i.toggle.icon-arrow-down {
+  1display: block !important;
+}
+.label-select:not(:hover) > i.toggle.icon-arrow-up {
+  1display: none !important;
+}
+.label-select:not(:hover) label.option > input:not(:checked) ~ span.title {
+  1display: none !important;
+}
+.label-select label.option {
+	display: block;
+	1overflow: hidden;
+	z-index: 1;
+	margin: 0;
+	position: relative;
+	float: left;
+    width: 20%;
+}
+.label-select label.option span.title{
+  display: none;
+}
+.label-select.active label.option span.title{
+	display: block;
+}
+.label-select .label-select_abs{
+	position: relative;
+    1background: white;
+    width: 100%;
+    float: left;
+}
+.label-select.active > i.toggle {
+	transform: rotate(-90deg);
+}
+.label-select .title,
+.label-select .placeholder {
+	position: relative;
+	display: block;
+	width: 100%;
+	height: 100%;
+	padding: 0;
+	background: white;
+	1border-top: 1px solid rgba(0, 0, 0, 0.05);
+	cursor: pointer;
+	background: transparent;
+}
+.label-select > input {
+	position: absolute;
+	left: 0px;
+	top: 0px;
+	z-index: 1;
+	width: 100%;
+	height: 100%;
+	display: block;
+	opacity: 0;
+	cursor: pointer;
+}
+.label-select > input:checked ~ i.toggle.icon-arrow-down {
+  display: none;
+}
+.label-select > input:checked ~ i.toggle.icon-arrow-up {
+  display: block;
+}
+.label-select > input:checked div.options label.option .title {
+ 1 display: none !important;
+}
+.label-select > input:not(:checked) {
+  z-index: 4;
+}
+.label-select > input:not(:checked) ~ label.option > span.title {
+  1display: none;
+}
+.label-select > input:not(:checked) ~ i.toggle.icon-arrow-up {
+  display: none;
+}
+.label-select > input:not(:checked) ~ i.toggle.icon-arrow-down {
+  display: block;
+}
+.label-select > input:disabled {
+  cursor: no-drop;
+}
+.label-select > span.placeholder {
+	position: absolute;
+	z-index: 0;
+	display: inline-block;
+	width: 100%;
+	color: #999;
+	border-top: 0px;
+	height: 57px;
+	line-height: 57px;
+	box-sizing: border-box;
+}
+.couple_select .select--type .label-select > span.placeholder{
+	padding-left: 10px;
+}
+.couple_select .select--color .label-select > span.placeholder{
+	padding-left: 0px; 
+}
+.couple_select .select--color .label-select > span.placeholder:before{
+	1content: ''; 
+	content: none;
+	position: absolute;
+	width: 52px;
+	height: 52px; 
+	left: 2px;
+	top: 2px;
+	border-radius: 6px;
+	display: inline-block;
+	box-shadow: 0px 0px 0px 1px rgba(0, 0, 0, 0.1);
+}
+
+.label-select label.option span.title {
+  position: relative;
+  z-index: 2;
+  transition: background .3s ease-out;
+  1display: table;
+    text-align: left;
+}
+.couple_select .select--color .label-select label.option span.title{
+	1padding-left: 60px;
+}
+.label-select label.option span.title span{
+    box-sizing: border-box;
+	padding: 0 10px;
+	white-space: nowrap;
+	line-height: 52px;
+	display: none;
+	position: absolute;
+}
+.label-select label.option span.title span small{
+    font-size: 12px;
+	color: #9999A4;
+}
+.label-select label.option span.title i.icon {
+	position: absolute;
+	left: 2px;
+	top: 2px;
+	bottom: 2px;
+	right: 2px;
+	border-radius: 4px;
+	background-size: 100%;
+	display: inline-block;
+}
+.label-select label.option span.title i.icon.icon_white {
+	box-shadow: 0px 0px 0px 1px rgba(0, 0, 0, 0.1);
+}
+.label-select label.option span.title:hover {
+  background: rgba(0,0,0,0.05);
+}
+.label-select label.option input {
+  display: none;
+}
+.label-select label.option input ~ span.title {
+  position: relative;
+  display: block;
+  z-index: 1;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  font-size: 0;
+  background: #fff;
+  overflow: hidden;
+  border-top: 0px;
+  border-radius: 5px;
+  box-shadow: none;
+  color: inherit;
+  width: 100%;
+  padding-bottom: 100%;
+}
+.label-select label.option input:checked ~ span.title {
+	background: #46a128;
+}
+.label-select label.option input ~ span.title span{
+	line-height: 52px;
+	height: 52px;
+	1display: inline-block;
+	vertical-align: top;
+	width: auto;
+}
+.label-select label.option input:checked ~ span.title span{
+	
+}
+.label-select label.option input:disabled ~ span.title {
+  background: #f9f9f9 !important;
+  color: #aaa;
+}
+.label-select label.option input:disabled ~ span.title:hover {
+  color: #aaa;
+  background: none;
+  cursor: no-drop;
+}
+@media screen and (max-width: 550px){
+	.couple_select .select--type,
+	.couple_select .select--color {
+		width: 100%;
+		margin: 0;
+	}
+	.couple_select .select--type .label-select{
+		border-radius: 8px 8px 0 0;
+	}
+	.couple_select .select--color .label-select{
+		border-radius: 0 0 8px 8px;
+		border-top: none;
+	}
+}
+
+
+.button input[type=button]{
+	background: transparent;
+    color: white;
+    font-size: 1rem;
+    border: none;
+    padding: 0 15px;
+    display: inline-block;
+    line-height: 50px;
+}
+.button.noactive{
+	background: #a6a6aa;
+}
+.button.noactive input[type=button]{
+	cursor: default;
+}
+
+.icon_question{
+	position: absolute;
+    width: 20px;
+    height: 20px;
+    top: 50%;
+    margin-top: -10px;
+    right: 10px;
+    background: white;
+    border-radius: 99px;
+    font-size: 0;
+    border: solid 1px #DBDBDB;
+}
+.icon_question:after{
+	content: '?';
+    position: absolute;
+    color: #7c7c7c;
+    font-size: 12px;
+    text-align: center;
+    width: 20px;
+    left: -1px;
+    height: 20px;
+    line-height: 20px;
+}

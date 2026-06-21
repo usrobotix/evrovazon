@@ -1,0 +1,16 @@
+<svg id="Меню" xmlns="http://www.w3.org/2000/svg" width="100" height="100" viewBox="0 0 100 100">
+  <defs>
+    <style>
+      .cls-1 {
+        fill: #f29610;
+        stroke: #f29610;
+        stroke-linejoin: bevel;
+        stroke-width: 0px;
+        fill-rule: evenodd;
+      }
+    </style>
+  </defs>
+  <rect id="Прямоугольник_2" data-name="Прямоугольник 2" class="cls-1" y="26" width="100" height="7.5"/>
+  <rect id="Прямоугольник_2_копия" data-name="Прямоугольник 2 копия" class="cls-1" y="46" width="100" height="7.5"/>
+  <rect id="Прямоугольник_2_копия_2" data-name="Прямоугольник 2 копия 2" class="cls-1" y="66" width="100" height="7.5"/>
+</svg>

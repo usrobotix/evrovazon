@@ -1,0 +1,24 @@
+@font-face {
+    font-family: 'Oxygen';
+    src: local('Oxygen'), url('oxygen.woff2') format('woff2'), url('oxygen.woff') format('woff'), url('oxygen.ttf') format('truetype');
+    font-weight: 400;
+    font-style: normal;
+}
+@font-face {
+    font-family: 'Oxygen';
+    src: local('Oxygen Italic'), local('Oxygen-Italic'), url('oxygenitalic.woff2') format('woff2'), url('oxygenitalic.woff') format('woff'), url('oxygenitalic.ttf') format('truetype');
+    font-weight: 400;
+    font-style: italic;
+}
+@font-face {
+    font-family: 'Oxygen';
+    src: local('Oxygen Bold'), local('Oxygen-Bold'), url('oxygenbold.woff2') format('woff2'), url('oxygenbold.woff') format('woff'), url('oxygenbold.ttf') format('truetype');
+    font-weight: 700;
+    font-style: normal;
+}
+@font-face {
+    font-family: 'Oxygen';
+    src: local('Oxygen Bold Italic'), local('Oxygen-BoldItalic'), url('oxygenbolditalic.woff2') format('woff2'), url('oxygenbolditalic.woff') format('woff'), url('oxygenbolditalic.ttf') format('truetype');
+    font-weight: 700;
+    font-style: italic;
+}

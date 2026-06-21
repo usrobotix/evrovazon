@@ -1,0 +1,384 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Скамейки и лавочки. Все серии — Евровазон</title>
+<!-- Шрифт Manrope — аналог Graphik LCG. В проде заменить на лицензионный Graphik LCG (woff2) -->
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="template/css/ev-base.css">
+<link rel="stylesheet" href="template/css/ev-header.css">
+<link rel="stylesheet" href="template/css/ev-footer.css">
+<link rel="stylesheet" href="template/css/ev-catalog.css">
+</head>
+<body class="ev-scope">
+
+<!-- ============================================================
+     header.php — НАЧАЛО
+     ============================================================ -->
+<!-- ============================================================
+     ПАРТИАЛ: header.php (тело шапки)
+     Десктоп .ev-header  ·  моб. режим < 1024px (бургер)
+     Подключить CSS: ev-base.css, ev-header.css
+     Подключить JS:  ev-core.js, ev-catalog-menu.js
+     ─────────────────────────────────────────────────────────
+     В Bitrix:
+       • верхнее меню .ev-topbar       → bitrix:menu "top_menu"
+       • поиск .ev-search              → bitrix:search.title / search.form
+       • корзина .ev-cart              → bitrix:sale.basket.basket.small
+       • кнопка «Каталог» .ev-catbtn   → открывает оверлей catalog_menu_button
+     Значения телефона/почты вынести в Битрикс-настройки или includes.
+     ============================================================ -->
+
+<div class="ev-topbar">
+  <div class="ev-wrap">
+    <a href="/">Главная</a>
+    <a href="/about/">О нас</a>
+    <a href="/projects/">Проекты</a>
+    <a href="/technology/">Технологии</a>
+    <a href="/news/">Новости</a>
+    <a href="/delivery/">Доставка / Оплата</a>
+    <a href="/warranty/">Гарантия</a>
+    <a href="/certificates/">Сертификаты</a>
+    <a href="/reviews/">Отзывы</a>
+    <a href="/faq/">Вопрос-ответ</a>
+  </div>
+</div>
+
+<header class="ev-header">
+  <div class="ev-wrap">
+    <a class="ev-logo" href="/">
+      <span class="ev-logo-mark"><img src="template/images/logo.svg" alt="EUROVAZON"></span>
+      <span class="ev-logo-tag"><img src="template/images/tagline.svg" alt="Производство малых архитектурных форм"></span>
+    </a>
+
+    <button class="ev-catbtn" id="evCatBtn" type="button" aria-label="Каталог">
+      <span class="ev-burger"><span></span><span></span><span></span></span>
+      <span class="ev-catbtn-t">Каталог</span>
+    </button>
+
+    <form class="ev-search" action="/search/" method="get" onsubmit="return false">
+      <span class="ev-ic ev-ic--search"></span>
+      <input type="text" name="q" placeholder="Быстрый поиск">
+      <span class="ev-find"><span class="ev-ic ev-ic--enter"></span>Найти</span>
+    </form>
+
+    <div class="ev-htools">
+      <div class="ev-contacts">
+        <div class="ev-contact-mail"><span class="ev-ic ev-ic--mail"></span><a href="mailto:info@eurovazon.com">info@eurovazon.com</a></div>
+        <div class="ev-contact-phone">
+          <div class="ev-cp-row"><span class="ev-ic ev-ic--phone"></span><a href="tel:+78124160603">+7 (812) 416-06-03</a></div>
+          <a class="ev-callback" href="#">Заказать звонок</a>
+        </div>
+      </div>
+      <div class="ev-cart" id="evCart">
+        <div class="ev-cart-top">
+          <span class="ev-ic ev-ic--cart"></span>
+          <span class="ev-badge" id="evCartBadge">0</span>
+        </div>
+        <span class="ev-cart-label">Ваш заказ</span>
+      </div>
+    </div>
+
+    <!-- ============================================================
+         Мобильные инструменты (видны < 1024px): телефон, поиск,
+         корзина, бургер «Меню». Бургер открывает многоуровневое
+         мобильное меню (.ev-mmenu) — НЕ оверлей каталога.
+         В Bitrix: телефон/корзина — те же значения, что десктоп.
+         ============================================================ -->
+    <div class="ev-mtools">
+      <a class="ev-mtool ev-mtool--phone" href="tel:+78124160603" aria-label="Позвонить"><span class="ev-ic ev-ic--phone"></span></a>
+      <button class="ev-mtool ev-mtool--search" id="evMSearchBtn" type="button" aria-label="Поиск"><span class="ev-ic ev-ic--search"></span></button>
+      <a class="ev-mtool ev-mtool--cart" href="#" aria-label="Корзина"><span class="ev-ic ev-ic--cart"></span><span class="ev-badge ev-badge--orange" id="evCartBadgeM">0</span></a>
+      <button class="ev-mtool ev-mtool--burger" id="evMenuBtn" type="button" aria-label="Меню"><span class="ev-mburger"><span></span><span></span><span></span></span></button>
+    </div>
+  </div>
+</header>
+
+<!-- ============================================================
+     ПАРТИАЛ: оверлей «Каталог» (мега-меню)
+     Размещается сразу после <header> в header.php.
+     В Bitrix: содержимое (.ev-catlist + .ev-catsubs) рендерит
+     bitrix:menu, шаблон "catalog_menu_button" (тип "catalog",
+     MAX_LEVEL: 3). Баннер .ev-cathero — статичный includes-блок.
+     JS открытия: ev-catalog-menu.js
+     ============================================================ -->
+
+<div class="ev-catoverlay" id="evCatOverlay">
+  <div class="ev-catscrim" data-close></div>
+  <div class="ev-catpanel">
+    <div class="ev-wrap" style="padding:0;max-width:none">
+      <h2 class="ev-cattitle">Каталог продукции</h2>
+      <div class="ev-cattitle-rule"></div>
+      <div class="ev-catgrid">
+
+        <nav class="ev-catlist">
+          <a href="/internet-magazin/folder/urny/">Урны и пепельницы</a>
+          <a href="/internet-magazin/folder/skameyki/" class="is-active">Скамейки и лавочки уличные</a>
+          <a href="/internet-magazin/folder/vazony/">Уличные вазоны для цветов</a>
+          <a href="/internet-magazin/folder/navesy/">Навесы перголы</a>
+          <a href="/internet-magazin/folder/zabornye-bloki/">Заборные блоки и навершия</a>
+          <a href="/internet-magazin/folder/plitka/">Плитка</a>
+          <a href="/internet-magazin/folder/bordyury/">Бордюры тротуарные для клумб</a>
+          <a href="/internet-magazin/folder/stolbiki/">Антипарковочные столбики и барьеры</a>
+          <a href="/internet-magazin/folder/veloparkovki/">Парковки для велосипедов</a>
+          <a href="/internet-magazin/folder/stoly/">Уличные столы</a>
+          <a href="/internet-magazin/folder/podpornye-stenki/">Опорные подпорные стенки</a>
+          <a href="/internet-magazin/folder/navigaciya/">Уличная навигация</a>
+          <a href="/internet-magazin/folder/ograzhdeniya-derevev/">Ограждения для деревьев</a>
+          <a href="/internet-magazin/folder/konteynernye-ploschadki/">Контейнерные площадки для мусора</a>
+          <a href="/internet-magazin/folder/novogodnyaya/">Новогодняя продукция</a>
+          <a href="/internet-magazin/folder/kacheli/">Парковые качели</a>
+          <a href="/internet-magazin/folder/stupeni/">Ступени</a>
+          <a href="/internet-magazin/folder/kosoury/">Деревянные косоуры</a>
+          <a href="/internet-magazin/folder/arhitekturnye/">Архитектурные элементы</a>
+          <a href="/internet-magazin/folder/gazonnoe-ograzhdenie/">Газонное ограждение</a>
+          <a href="/internet-magazin/folder/parkovoe-ograzhdenie/">Парковое ограждение</a>
+        </nav>
+
+        <div class="ev-catright">
+          <div class="ev-cathero">
+            <h3>Скамейки и лавочки уличные</h3>
+            <img class="ev-cathero-img" src="template/images/menu-preview.png" alt="">
+          </div>
+          <div class="ev-catsubs">
+            <a href="/internet-magazin/folder/skameyki/metallicheskie/">Металлические скамейки<span class="ev-ic ev-ic--arrow"></span></a>
+            <a href="/internet-magazin/folder/skameyki/belye/">Белые скамейки<span class="ev-ic ev-ic--arrow"></span></a>
+            <a href="/internet-magazin/folder/skameyki/betonnye/">Бетонные скамейки<span class="ev-ic ev-ic--arrow"></span></a>
+            <a href="/internet-magazin/folder/skameyki/klassicheskie/">Классические скамейки<span class="ev-ic ev-ic--arrow"></span></a>
+            <a href="/internet-magazin/folder/skameyki/derevyannye/">Деревянные скамейки<span class="ev-ic ev-ic--arrow"></span></a>
+            <a href="/internet-magazin/folder/skameyki/divany/">Парковые диваны<span class="ev-ic ev-ic--arrow"></span></a>
+            <a href="/internet-magazin/folder/skameyki/shezlongi/">Шезлонги<span class="ev-ic ev-ic--arrow"></span></a>
+            <a href="/internet-magazin/folder/skameyki/loft/">Скамейки в стиле лофт<span class="ev-ic ev-ic--arrow"></span></a>
+            <a href="/internet-magazin/folder/skameyki/metall-derevo/">Скамейки из металла и дерева<span class="ev-ic ev-ic--arrow"></span></a>
+            <a href="/internet-magazin/folder/skameyki/vokrug-dereva/">Скамейки вокруг дерева<span class="ev-ic ev-ic--arrow"></span></a>
+            <a href="/internet-magazin/folder/skameyki/kruglye/">Круглые скамейки<span class="ev-ic ev-ic--arrow"></span></a>
+            <a href="/internet-magazin/folder/skameyki/vokzaly/">Скамейки для вокзалов и МФЦ<span class="ev-ic ev-ic--arrow"></span></a>
+            <a href="/internet-magazin/folder/skameyki/polukruglye/">Полукруглые скамейки<span class="ev-ic ev-ic--arrow"></span></a>
+            <a href="/internet-magazin/folder/skameyki/podlokotniki/">Скамейки с подлокотниками<span class="ev-ic ev-ic--arrow"></span></a>
+            <a href="/internet-magazin/folder/skameyki/bez-spinki/">Скамейки без спинки<span class="ev-ic ev-ic--arrow"></span></a>
+            <a href="/internet-magazin/folder/skameyki/so-stolikom/">Скамейки со столиком<span class="ev-ic ev-ic--arrow"></span></a>
+            <a href="/internet-magazin/folder/skameyki/uglovye/">Угловые скамейки<span class="ev-ic ev-ic--arrow"></span></a>
+            <a href="/internet-magazin/folder/skameyki/divany-kresla/">Уличные диваны и кресла<span class="ev-ic ev-ic--arrow"></span></a>
+            <a href="/internet-magazin/folder/skameyki/parkovye/">Парковые скамейки<span class="ev-ic ev-ic--arrow"></span></a>
+            <a href="/internet-magazin/folder/skameyki/lezhaki/">Шезлонги и лежаки<span class="ev-ic ev-ic--arrow"></span></a>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ============================================================
+     ПАРТИАЛ: мобильное меню (видно < 1024px, открывает бургер #evMenuBtn)
+     Многоуровневое: главное → каталог товаров → фильтр категории.
+     В Bitrix:
+       • уровень «главное» нижние ссылки → bitrix:menu top_menu
+       • уровень «каталог» список → bitrix:menu catalog_menu_button
+       • уровень «категория» (Материал/Форма) → catalog.smart.filter "new"
+     JS: ev-catalog-menu.js
+     ============================================================ -->
+<div class="ev-mmenu" id="evMmenu">
+  <div class="ev-mscrim" data-mclose></div>
+  <div class="ev-mpanel">
+    <form class="ev-msearch" action="/search/" method="get" onsubmit="return false">
+      <span class="ev-ic ev-ic--search"></span>
+      <input type="text" name="q" placeholder="Быстрый поиск">
+      <button type="submit" class="ev-msearch-btn">Найти</button>
+    </form>
+
+    <div class="ev-mviewport">
+      <div class="ev-mslider" data-level="main">
+
+        <!-- УРОВЕНЬ 1: главное меню -->
+        <nav class="ev-mlevel ev-mlevel--main">
+          <a class="ev-mrow ev-mrow--catalog" data-go="catalog">Каталог товаров<span class="ev-ic ev-ic--arrow"></span></a>
+          <div class="ev-mdiv"></div>
+          <a class="ev-mrow" href="/about/">О нас</a>
+          <a class="ev-mrow" href="/projects/">Проекты</a>
+          <a class="ev-mrow" href="/technology/">Технологии</a>
+          <a class="ev-mrow" href="/news/">Новости</a>
+          <a class="ev-mrow" href="/delivery/">Доставка / Оплата</a>
+          <a class="ev-mrow" href="/warranty/">Гарантия</a>
+          <a class="ev-mrow" href="/certificates/">Сертификаты</a>
+          <a class="ev-mrow" href="/reviews/">Отзывы</a>
+          <a class="ev-mrow" href="/faq/">Вопрос-ответ</a>
+        </nav>
+
+        <!-- УРОВЕНЬ 2: каталог продукции -->
+        <nav class="ev-mlevel ev-mlevel--catalog">
+          <a class="ev-mback" data-go="main"><span class="ev-ic ev-ic--arrow"></span>В главное меню</a>
+          <a class="ev-mrow ev-mrow--chev" href="/internet-magazin/folder/urny/" data-go="cat" data-cat="Урны и пепельницы">Урны и пепельницы<span class="ev-ic ev-ic--arrow"></span></a>
+          <a class="ev-mrow ev-mrow--chev" href="/internet-magazin/folder/skameyki/" data-go="cat" data-cat="Скамейки и лавочки уличные">Скамейки и лавочки уличные<span class="ev-ic ev-ic--arrow"></span></a>
+          <a class="ev-mrow ev-mrow--chev" href="/internet-magazin/folder/vazony/" data-go="cat" data-cat="Уличные вазоны для цветов">Уличные вазоны для цветов<span class="ev-ic ev-ic--arrow"></span></a>
+          <a class="ev-mrow ev-mrow--chev" href="/internet-magazin/folder/navesy/" data-go="cat" data-cat="Навесы перголы">Навесы перголы<span class="ev-ic ev-ic--arrow"></span></a>
+          <a class="ev-mrow ev-mrow--chev" href="/internet-magazin/folder/zabornye-bloki/" data-go="cat" data-cat="Заборные блоки и навершия">Заборные блоки и навершия<span class="ev-ic ev-ic--arrow"></span></a>
+          <a class="ev-mrow ev-mrow--chev" href="/internet-magazin/folder/plitka/" data-go="cat" data-cat="Плитка">Плитка<span class="ev-ic ev-ic--arrow"></span></a>
+          <a class="ev-mrow ev-mrow--chev" href="/internet-magazin/folder/bordyury/" data-go="cat" data-cat="Бордюры тротуарные для клумб">Бордюры тротуарные для клумб<span class="ev-ic ev-ic--arrow"></span></a>
+          <a class="ev-mrow ev-mrow--chev" href="/internet-magazin/folder/stolbiki/" data-go="cat" data-cat="Антипарковочные столбики и парковочные барьеры">Антипарковочные столбики и парковочные барьеры<span class="ev-ic ev-ic--arrow"></span></a>
+          <a class="ev-mrow ev-mrow--chev" href="/internet-magazin/folder/veloparkovki/" data-go="cat" data-cat="Парковки для велосипедов">Парковки для велосипедов<span class="ev-ic ev-ic--arrow"></span></a>
+          <a class="ev-mrow ev-mrow--chev" href="/internet-magazin/folder/stoly/" data-go="cat" data-cat="Уличные столы">Уличные столы<span class="ev-ic ev-ic--arrow"></span></a>
+          <a class="ev-mrow ev-mrow--chev" href="/internet-magazin/folder/podpornye-stenki/" data-go="cat" data-cat="Опорные подпорные стенки">Опорные подпорные стенки<span class="ev-ic ev-ic--arrow"></span></a>
+          <a class="ev-mrow ev-mrow--chev" href="/internet-magazin/folder/navigaciya/" data-go="cat" data-cat="Уличная навигация">Уличная навигация<span class="ev-ic ev-ic--arrow"></span></a>
+          <a class="ev-mrow ev-mrow--chev" href="/internet-magazin/folder/ograzhdeniya-derevev/" data-go="cat" data-cat="Ограждения для деревьев">Ограждения для деревьев<span class="ev-ic ev-ic--arrow"></span></a>
+          <a class="ev-mrow ev-mrow--chev" href="/internet-magazin/folder/konteynernye-ploschadki/" data-go="cat" data-cat="Контейнерные площадки для мусора">Контейнерные площадки для мусора<span class="ev-ic ev-ic--arrow"></span></a>
+          <a class="ev-mrow ev-mrow--chev" href="/internet-magazin/folder/novogodnyaya/" data-go="cat" data-cat="Новогодняя продукция">Новогодняя продукция<span class="ev-ic ev-ic--arrow"></span></a>
+          <a class="ev-mrow ev-mrow--chev" href="/internet-magazin/folder/kacheli/" data-go="cat" data-cat="Парковые качели">Парковые качели<span class="ev-ic ev-ic--arrow"></span></a>
+          <a class="ev-mrow ev-mrow--chev" href="/internet-magazin/folder/stupeni/" data-go="cat" data-cat="Ступени">Ступени<span class="ev-ic ev-ic--arrow"></span></a>
+          <a class="ev-mrow ev-mrow--chev" href="/internet-magazin/folder/kosoury/" data-go="cat" data-cat="Деревянные косоуры">Деревянные косоуры<span class="ev-ic ev-ic--arrow"></span></a>
+          <a class="ev-mrow ev-mrow--chev" href="/internet-magazin/folder/arhitekturnye/" data-go="cat" data-cat="Архитектурные элементы благоустройства">Архитектурные элементы благоустройства<span class="ev-ic ev-ic--arrow"></span></a>
+          <a class="ev-mrow ev-mrow--chev" href="/internet-magazin/folder/gazonnoe-ograzhdenie/" data-go="cat" data-cat="Газонное ограждение">Газонное ограждение<span class="ev-ic ev-ic--arrow"></span></a>
+          <a class="ev-mrow ev-mrow--chev" href="/internet-magazin/folder/parkovoe-ograzhdenie/" data-go="cat" data-cat="Парковое ограждение">Парковое ограждение<span class="ev-ic ev-ic--arrow"></span></a>
+        </nav>
+
+        <!-- УРОВЕНЬ 3: категория + фильтр (ДЕМО, в проде smart.filter) -->
+        <nav class="ev-mlevel ev-mlevel--cat">
+          <a class="ev-mback" data-go="main"><span class="ev-ic ev-ic--arrow"></span>В главное меню</a>
+          <a class="ev-mrow ev-mrow--active" id="evMcatTitle" data-go="catalog">Урны и пепельницы<span class="ev-ic ev-ic--arrow"></span></a>
+          <div class="ev-macc">
+            <button type="button" class="ev-macc-head" data-acc>Материал<span class="ev-macc-chev"></span></button>
+            <div class="ev-macc-body">
+              <a href="#">Бетон</a><a href="#">Металл</a><a href="#">Дерево</a>
+            </div>
+          </div>
+          <div class="ev-macc is-open">
+            <button type="button" class="ev-macc-head" data-acc>Форма<span class="ev-macc-chev"></span></button>
+            <div class="ev-macc-body">
+              <a href="#">Прямые</a><a href="#">Радиусные</a><a href="#">Круглые</a><a href="#">Прямоугольные</a>
+            </div>
+          </div>
+        </nav>
+
+      </div>
+    </div>
+
+    <div class="ev-mfoot">
+      <div class="ev-mfoot-phone">+7 (812) 416 06 03</div>
+      <div class="ev-mfoot-sub">(бесплатно по России)</div>
+      <a class="ev-mfoot-mail" href="mailto:info@eurovazon.com">info@eurovazon.com</a>
+      <div class="ev-mfoot-soc">
+        <a class="ev-soc" href="https://vk.com/" aria-label="VK"><span class="ev-ic ev-ic--vk"></span></a>
+        <a class="ev-soc" href="https://t.me/" aria-label="Telegram"><span class="ev-ic ev-ic--tg"></span></a>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ============================================================
+     header.php — КОНЕЦ  ·  КОНТЕНТ СТРАНИЦЫ — НАЧАЛО
+     ============================================================ -->
+
+<main class="ev-cat-page" data-screen-label="Раздел">
+  <div class="ev-wrap">
+    <nav class="ev-crumbs">
+      <a href="/">Евровазон</a><span class="sep">›</span>
+      <a href="section.html">Скамейки и лавочки уличные</a><span class="sep">›</span>
+      <span class="cur">Все серии</span>
+    </nav>
+    <h1 class="ev-h1">Скамейки и лавочки. Все серии</h1>
+
+    <div class="ev-cat-layout">
+      <aside class="ev-side">
+        <nav>
+          <a href="products.html" class="is-active">Металлические скамейки</a>
+          <a href="products.html">Бетонные скамейки</a>
+          <a href="products.html">Деревянные скамейки</a>
+          <a href="products.html">Шезлонги</a>
+          <a href="products.html">Скамейки из металла и дерева</a>
+          <a href="products.html">Круглые скамейки</a>
+          <a href="products.html">Полукруглые скамейки</a>
+          <a href="products.html">Скамейки без спинки</a>
+          <a href="products.html">Угловые скамейки</a>
+          <a href="products.html">Парковые скамейки</a>
+          <a href="products.html">Белые скамейки</a>
+          <a href="products.html">Классические скамейки</a>
+          <a href="products.html">Парковые диваны</a>
+          <a href="products.html">Скамейки в стиле лофт</a>
+          <a href="products.html">Скамейки вокруг дерева</a>
+          <a href="products.html">Скамейки с подлокотниками</a>
+          <a href="products.html">Скамейки со столиком</a>
+          <a href="products.html">Уличные диваны и кресла</a>
+        </nav>
+      </aside>
+
+      <div>
+        <div class="ev-series-grid">
+          <a class="ev-series-card" href="products.html"><span class="ev-series-chip">Серия «Вива»</span><div class="ev-ph"><img src="template/images/p-viva.png" alt="Серия Вива"></div><div class="ev-cnt">Всего изделий: 12</div></a>
+          <a class="ev-series-card" href="products.html"><span class="ev-series-chip">Серия «Гринвич»</span><div class="ev-ph"><img src="template/images/p-grinvich.png" alt="Серия Гринвич"></div><div class="ev-cnt">Всего изделий: 12</div></a>
+          <a class="ev-series-card" href="products.html"><span class="ev-series-chip">Серия «Нова»</span><div class="ev-ph"><img src="template/images/p-nova.png" alt="Серия Нова"></div><div class="ev-cnt">Всего изделий: 12</div></a>
+          <a class="ev-series-card" href="products.html"><span class="ev-series-chip">Серия «Бенч»</span><div class="ev-ph"><img src="template/images/p-bench.png" alt="Серия Бенч"></div><div class="ev-cnt">Всего изделий: 12</div></a>
+          <a class="ev-series-card" href="products.html"><span class="ev-series-chip">Серия «Евро Гео»</span><div class="ev-ph"><img src="template/images/p-evrogeo.png" alt="Серия Евро Гео"></div><div class="ev-cnt">Всего изделий: 12</div></a>
+          <a class="ev-series-card" href="products.html"><span class="ev-series-chip">Серия «Нова»</span><div class="ev-ph"><img src="template/images/p-nova2.png" alt="Серия Нова"></div><div class="ev-cnt">Всего изделий: 12</div></a>
+          <a class="ev-series-card" href="products.html"><span class="ev-series-chip">Серия «Вива»</span><div class="ev-ph"><img src="template/images/p-viva2.png" alt="Серия Вива"></div><div class="ev-cnt">Всего изделий: 12</div></a>
+          <a class="ev-series-card" href="products.html"><span class="ev-series-chip">Серия «Арена»</span><div class="ev-ph"><img src="template/images/p-arena.png" alt="Серия Арена"></div><div class="ev-cnt">Всего изделий: 12</div></a>
+          <a class="ev-series-card" href="products.html"><span class="ev-series-chip">Серия «Нова»</span><div class="ev-ph"><img src="template/images/p-nova3.png" alt="Серия Нова"></div><div class="ev-cnt">Всего изделий: 12</div></a>
+        </div>
+        <nav class="ev-pager">
+          <a href="#" class="is-active">1</a>
+          <a href="#">2</a>
+          <a href="#">3</a>
+        </nav>
+      </div>
+    </div>
+  </div>
+</main>
+
+<!-- ============================================================
+     КОНТЕНТ — КОНЕЦ  ·  footer.php — НАЧАЛО
+     ============================================================ -->
+<!-- ============================================================
+     ПАРТИАЛ: footer.php
+     Подключить CSS: ev-footer.css
+     В Bitrix: телефон/почта/соцсети — из includes/, нижнее
+     меню → bitrix:menu "bottom_menu" (при наличии).
+     ============================================================ -->
+
+<footer class="ev-footer">
+  <div class="ev-wrap">
+    <div class="ev-foot-soc">
+      <a class="ev-soc" href="https://vk.com/" aria-label="VK"><span class="ev-ic ev-ic--vk"></span></a>
+      <a class="ev-soc" href="https://t.me/" aria-label="Telegram"><span class="ev-ic ev-ic--tg"></span></a>
+    </div>
+
+    <div class="ev-foot-main">
+      <div class="ev-foot-row1">
+        <div class="ev-foot-phone">
+          <div class="ev-pn">+7 (812) 416 06 03</div>
+          <div class="ev-pn-sub">(бесплатно по России)</div>
+        </div>
+        <a class="ev-foot-mail" href="mailto:info@eurovazon.com">info@eurovazon.com</a>
+        <div class="ev-foot-iso"><img src="template/images/iso-badge.jpg" alt="ISO"><span>ISO 9001:2015</span></div>
+      </div>
+
+      <div class="ev-foot-nav">
+        <ul>
+          <li><a href="/">Главная</a></li>
+          <li><a href="/about/">О нас</a></li>
+          <li><a href="/delivery/">Доставка/Оплата</a></li>
+          <li><a href="/warranty/">Гарантия</a></li>
+        </ul>
+        <ul>
+          <li><a href="/faq/">Вопрос-ответ</a></li>
+          <li><a href="/vacancies/">Вакансии</a></li>
+          <li><a href="/contacts/">Контакты</a></li>
+        </ul>
+      </div>
+
+      <div class="ev-foot-copy">
+        <span class="ev-cc">© ООО «Евровазон» (www.eurovazon.com) 2011 - 2025</span><br>
+        Любое использование либо копирование материалов сайта, элементов дизайна и оформления допускается лишь с разрешения правообладателя и только со ссылкой на источник: www.eurovazon.com. Цены на товары, характеристики изделий (дизайн, размеры, вес, цвет) указанные на сайте, не являются публичной офертой и могут быть изменены на усмотрение производителя.
+      </div>
+    </div>
+  </div>
+</footer>
+<!-- ============================================================
+     footer.php — КОНЕЦ
+     ============================================================ -->
+
+<script src="template/js/ev-core.js"></script>
+<script src="template/js/ev-catalog-menu.js"></script>
+</body>
+</html>

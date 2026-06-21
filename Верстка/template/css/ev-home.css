@@ -1,0 +1,93 @@
+/* ============================================================
+   ev-home.css — главная страница
+   Интеграция: page_templates/index.php (главная)
+   ============================================================ */
+
+.ev-home-hero{position:relative;padding:56px 0 40px;}
+.ev-home-hero h1{font-size:65px;font-weight:700;margin:0 0 14px;letter-spacing:-1px;line-height:1;}
+.ev-home-hero .ev-sub{font-size:35px;font-weight:500;margin:0;color:#000;}
+.ev-home-hero .ev-stamp{position:absolute;right:0;top:24px;width:150px;height:auto;}
+
+/* ---- сетка категорий: подсписок раскрывается по наведению ---- */
+.ev-cat-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:30px;padding-bottom:64px;}
+.ev-cat-card{position:relative;height:480px;background:#fff;border-radius:var(--ev-radius);
+  overflow:hidden;box-shadow:var(--ev-shadow-s);transition:box-shadow .3s cubic-bezier(.4,0,.2,1);}
+.ev-cat-card:hover{box-shadow:var(--ev-shadow);}
+.ev-cat-photo{display:block;width:100%;height:100%;position:relative;}
+.ev-cat-photo img{width:100%;height:100%;object-fit:cover;}
+.ev-cat-label{position:absolute;left:0;top:30px;z-index:3;background:var(--ev-green);color:#fff;
+  font-size:24px;font-weight:600;line-height:1.15;padding:13px 24px;border-radius:0 6px 6px 0;
+  max-width:90%;text-wrap:balance;}
+
+/* выезжающий блок подкатегорий (в покое скрыт) — плавный in/out */
+.ev-cat-hover{position:absolute;left:0;right:0;bottom:0;z-index:2;background:#fff;
+  transform:translateY(101%);transition:transform .42s cubic-bezier(.4,0,.2,1);}
+.ev-cat-card:hover .ev-cat-hover,
+.ev-cat-card:focus-within .ev-cat-hover{transform:translateY(0);}
+.ev-cat-rule{height:5px;background:var(--ev-green);}
+.ev-cat-sublist{display:grid;grid-template-columns:1fr 1fr;gap:13px 24px;padding:24px 28px 4px;}
+.ev-cat-sublist a{font-size:18px;color:#000;transition:color .15s;}
+.ev-cat-sublist a:hover{color:var(--ev-green);}
+.ev-cat-featured-foot{padding:14px 28px 24px;text-align:right;}
+
+/* блок преимуществ */
+.ev-feature-strip{background:#fff;}
+.ev-feature-strip .ev-wrap{display:grid;grid-template-columns:repeat(6,1fr);gap:24px;padding:54px var(--ev-gut);}
+.ev-feature{display:flex;flex-direction:column;align-items:center;text-align:center;gap:16px;}
+.ev-feature .ev-fic{width:64px;height:64px;color:var(--ev-green);}
+.ev-feature .ev-fic svg{width:100%;height:100%;}
+.ev-feature .ev-flabel{font-size:20px;color:var(--ev-green);line-height:1.3;}
+
+/* о компании + видео (пропорции по макету: текст ~627 / видео ~1097×600) */
+.ev-about{padding:80px 0;}
+.ev-about .ev-wrap{display:grid;grid-template-columns:minmax(0,627fr) minmax(0,1097fr);gap:56px;align-items:center;}
+.ev-about h2{font-size:35px;font-weight:500;margin:0 0 26px;line-height:1.2;}
+.ev-about p{font-size:20px;line-height:1.6;margin:0 0 22px;color:#000;}
+.ev-video{position:relative;border-radius:var(--ev-radius);overflow:hidden;aspect-ratio:1097/600;background:#000;cursor:pointer;}
+.ev-video img{width:100%;height:100%;object-fit:cover;opacity:.78;}
+.ev-video .ev-play{position:absolute;inset:0;margin:auto;width:68px;height:48px;background:var(--ev-red);
+  border-radius:14px;display:flex;align-items:center;justify-content:center;transition:transform .2s,background .2s;}
+.ev-video:hover .ev-play{transform:scale(1.08);background:#e60030;}
+.ev-video .ev-play::after{content:"";border-left:18px solid #fff;border-top:10px solid transparent;border-bottom:10px solid transparent;margin-left:4px;}
+
+/* отзывы */
+.ev-reviews{padding-bottom:90px;}
+.ev-reviews-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:30px;}
+.ev-review{background:#fff;border-radius:var(--ev-radius);padding:30px;box-shadow:var(--ev-shadow-s);}
+.ev-review-head{display:flex;align-items:center;gap:18px;margin-bottom:22px;}
+.ev-review-head img{width:90px;height:90px;border-radius:6px;object-fit:cover;flex:none;}
+.ev-review-head .ev-who{font-size:22px;font-weight:600;}
+.ev-review-head .ev-date{font-size:16px;color:var(--ev-gray);margin-top:8px;}
+.ev-review-text{font-size:17px;line-height:1.55;color:#000;
+  display:-webkit-box;-webkit-line-clamp:6;-webkit-box-orient:vertical;overflow:hidden;
+  -webkit-mask-image:linear-gradient(#000 60%,transparent);mask-image:linear-gradient(#000 60%,transparent);}
+.ev-review.is-open .ev-review-text{-webkit-line-clamp:unset;-webkit-mask-image:none;mask-image:none;}
+.ev-review-more{margin-top:18px;color:var(--ev-green);font-weight:500;font-size:17px;cursor:pointer;}
+
+@media(max-width:1024px){
+  .ev-home-hero{padding:26px 0 22px;}
+  .ev-home-hero h1{font-size:34px;}
+  .ev-home-hero .ev-sub{font-size:18px;}
+  .ev-home-hero .ev-stamp{width:84px;top:18px;}
+  .ev-cat-grid{grid-template-columns:1fr 1fr;gap:16px;padding-bottom:36px;}
+  .ev-cat-card{height:300px;}
+  .ev-cat-label{font-size:18px;padding:9px 16px;top:18px;}
+  /* на мобиле карточки — только фото со ссылкой; подсписки доступны в меню каталога */
+  .ev-cat-hover{display:none;}
+  .ev-feature-strip .ev-wrap{grid-template-columns:repeat(3,1fr);gap:28px 16px;padding:34px var(--ev-gut);}
+  .ev-feature .ev-fic{width:50px;height:50px;}
+  .ev-feature .ev-flabel{font-size:15px;}
+  .ev-about{padding:44px 0;}
+  .ev-about .ev-wrap{grid-template-columns:1fr;gap:28px;}
+  .ev-about h2{font-size:24px;}
+  .ev-about p{font-size:16px;}
+  .ev-reviews-grid{grid-template-columns:1fr;gap:16px;}
+  .ev-reviews{padding-bottom:48px;}
+}
+@media(max-width:560px){
+  .ev-home-hero h1{font-size:27px;}
+  .ev-home-hero .ev-sub{font-size:15px;}
+  .ev-cat-grid{grid-template-columns:1fr;}
+  .ev-cat-sublist{grid-template-columns:1fr 1fr;}
+  .ev-feature-strip .ev-wrap{grid-template-columns:repeat(2,1fr);}
+}

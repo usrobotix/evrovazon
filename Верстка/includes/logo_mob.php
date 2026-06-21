@@ -1,0 +1,1 @@
+<a class="b-aside-menu__logo-link" href="/"> <span class="svg-icon svg-icon--logo_icon"><svg class="svg-icon__link"><use xlink:href="#logo_icon" /></svg></span> </a>

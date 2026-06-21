@@ -1,0 +1,17 @@
+<svg id="Группа_1" data-name="Группа 1" xmlns="http://www.w3.org/2000/svg" width="100" height="100" viewBox="0 0 100 100">
+  <defs>
+    <style>
+      .cls-1 {
+        fill: #999;
+        stroke: #999;
+        stroke-width: 1px;
+        fill-rule: evenodd;
+      }
+    </style>
+  </defs>
+  <path id="Фигура_1" data-name="Фигура 1" class="cls-1" d="M10,52.993V45.015H92v7.978H10Z"/>
+  <path id="Фигура_1_копия" data-name="Фигура 1 копия" class="cls-1" d="M68.429,30.826l5.915-5.862L98,48.412l-5.914,5.862Z"/>
+  <path id="Фигура_1_копия_2" data-name="Фигура 1 копия 2" class="cls-1" d="M74.553,72.035l-5.862-5.81,23.447-23.24L98,48.794Z"/>
+  <path id="Фигура_1_копия_3" data-name="Фигура 1 копия 3" class="cls-1" d="M31.308,66.2l-5.862,5.831L2,48.708l5.862-5.831Z"/>
+  <path id="Фигура_1_копия_3-2" data-name="Фигура 1 копия 3" class="cls-1" d="M25.239,25.224L31.048,31,7.809,54.124,2,48.343Z"/>
+</svg>

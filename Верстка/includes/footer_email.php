@@ -1,0 +1,1 @@
+<a class = 'footer_email' href="mailto:info@eurovazon.com">info@eurovazon.com</a>
